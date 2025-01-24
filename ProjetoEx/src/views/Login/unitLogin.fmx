@@ -1,0 +1,934 @@
+object frmLogin: TfrmLogin
+  Left = 0
+  Top = 0
+  Caption = 'Login'
+  ClientHeight = 790
+  ClientWidth = 318
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object TabControl: TTabControl
+    Align = Client
+    Size.Width = 318.000000000000000000
+    Size.Height = 790.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = None
+    Sizes = (
+      318s
+      790s
+      318s
+      790s
+      318s
+      790s)
+    object tabLogin: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = True
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'tabLogin'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object Layout2: TLayout
+        Align = Center
+        Size.Width = 293.000000000000000000
+        Size.Height = 253.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object rectFaceBook: TRectangle
+          Align = Top
+          Fill.Color = xFF3D5AE8
+          Size.Width = 293.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          object btnAcessarFacebook: TSpeedButton
+            Align = Client
+            Cursor = crHandPoint
+            StyledSettings = [Family]
+            Size.Width = 293.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Acessar com o Facebook'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            object Image1: TImage
+              MultiResBitmap.Width = 48
+              MultiResBitmap = <
+                item
+                  Width = 48
+                  Height = 48
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                    870000000473424954080808087C0864880000049A494441546881ED984D685C
+                    5514C7FFE7BE99C957D35453433333010D96C618AC6864D455A1C565358B06C5
+                    284A92B118ABA2BBA21845B7856229E60B512CAEEAA67163C185602B94B6B4A4
+                    214641DA64D26893694DA6F998997B8E8BA4DA64EE7BF3DE9B194199DFF2DC7B
+                    BEDE3BE7DDF32E50A64C99FF34542C43C191E9DD5A632F917A52447611A109A0
+                    2D6BAB9212C135229A14E2B316E1FB4C77F45231FC1696C0C88D5AC5AB7125E8
+                    16A2873C39161E67D008674283E86B48F90DC15F02FD1250D1C421627A0F847B
+                    FD3A5F675E401F73A2F118FA29EB55D97B0203332D4AC9D7043CEA59D701615C
+                    E4005E4077E4672F7A9E12B00613FB4172E29FDA2E32228B50F4A2EE899C72AB
+                    A2DC6EB486675E02C9C992050F0044B510F9C61A9AE972ADE266D3FA933F0950
+                    C07F745E902C041D3A1E1DCDB7337F029F4DEDB4149D07516D2121550508E16A
+                    0B7521C2525690D6823F5618A98CD868484AB37A02AF85279CEC3A27D02F0115
+                    9939E7B76109C081E62ABCDE5A835843104195EBAEE37412A7AEAE18F5057281
+                    139198D3D7C9B12454347188847C051F54842FF66C43677395E33EA72748A0C7
+                    54F87A1F03476D63B4D5FE72B6860487F3466AC347EDB57983770391BC8F911B
+                    B6E56B9B805ACD1E0468BB1FA78DD516DE6AABF1A36AA25EE9D55EBB45DB125A
+                    1B0FFC793CD05C8990A1DE6FA519C7C76F632AA5FF965D9ACFE4B5A720DD0C1C
+                    31AD1913088E4CEF66F636DBDC4DECBE9051FEEC7749FC389BF66C4F48B58686
+                    67DBD23D3BC636AF194B4833F679F672174D5BAC1CD95832E32BF83B6499F79A
+                    E4C604082AE6DB1380BA50AED9CB49CF73DA0648E42993DC9880405A0A716619
+                    7A27B9CA85988428EC32C96DDE00C20579330550A03E41A226B9F9332A28686C
+                    280DE651A6E0E1EC83C76BF146EBC66FFE56430FC45BAAD1F560EEC1B667740E
+                    576EFAEF0F7302844500F56E0C5459847B2AF24FE51516A16253730880DF16B5
+                    5921075934496D9A18332EAD16C4B594C652D65D770868DA24B76962721C618B
+                    C5E49FEE4B8718C65F4DF31B10FEC9674C9E98B8E53E015174C624374E3BA1A1
+                    A9473494AB7B9BAA00A172536D9FD9BF1D3BEB36B6D7D0C4120E9F5BD8205BCE
+                    0A56B4BB12B244B5A5E38D5736CB8D4D9CEE6DBAAC06A6C748515B3EC3CB59C1
+                    F2A63A36C5B4A205377D1E66243C9E8E477282079CFE07089FFBF2560258D1B0
+                    DD9A6D025C19180064AE342179629E574343768BF66FE0E51DB705EA939284E4
+                    01117CE874F5E8780271A2F198302E163F2C7708F83C6F0B1F77DAE37C84F653
+                    962DEE84F082E3BE92202966AB0B9DE47854E79F017A9A7E85525D801436D07B
+                    42B2203C9FEF4E087079B5B87657A95EFD7792902C44BDA27BA2DFBAD9EDFA6E
+                    54F786BF82A003621EAA8A82F00208CFE978F8845B15D70900808E474735D02E
+                    900BDEA37346C0E735A3DDED93BF83A7040000F1E824272231117A1BC0BC67FD
+                    1C644E046F725D3486834DBF78D5F69E00B0F6758A878FEA74F07E11795700E3
+                    31EF84B08C09C93B3A1D7A80E3914FF37D6DEC28EC8FACAF21B57EE174243478
+                    FDE12C641F913C7D35A59FA909606B7DA5A50020B9A23995D1BF83F183109DE5
+                    009D466FE37841BECB9429F3FFE02F73EBA1E9F8D59F120000000049454E44AE
+                    426082}
+                  FileName = 
+                    'C:\Users\well well\Desktop\Estudo TI\Projetos\ProjetoEx\assets\i' +
+                    'mgs\logoFacebook.png'
+                end>
+              Align = Left
+              Margins.Left = 10.000000000000000000
+              Position.X = 10.000000000000000000
+              Size.Width = 39.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+        end
+        object rectGoogle: TRectangle
+          Align = Top
+          Fill.Color = xFF3D5AE8
+          Margins.Top = 10.000000000000000000
+          Position.Y = 60.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          object btnAcessarGoogle: TSpeedButton
+            Align = Client
+            Cursor = crHandPoint
+            StyledSettings = [Family]
+            Size.Width = 293.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Acessar com o Google'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            object Image4: TImage
+              MultiResBitmap.Height = 64
+              MultiResBitmap.Width = 64
+              MultiResBitmap = <
+                item
+                  Width = 64
+                  Height = 64
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+                    DE0000000473424954080808087C0864880000091E49444154789CED9A798C95
+                    D515C07FE77E6FDE2CAC6341A0D252AD228AD6144404A1D2C5B4A0B16A234123
+                    D5B8204DC0886D71AD4ED236A94D6A6D6A1559238D6D85168DA22488B2CC4851
+                    59843A03B22F3A20A2B32FEFBDEFBBA77F3CC7CEDB66EE5B46DB747EC9CB9BB9
+                    DF39E79E7BBEEF9E77EEFD2EF4D24B2FBDF4D24B2FBDFC9F229F47273AEB8161
+                    41D8FBAE787682F18AC604468780E90FD24FC400B645AD6DC6B747C5FABB7447
+                    F5AB9EEA3A79E3C5A69EF6ADC702A0B36695D9E2D367AA676E9270D1A5022127
+                    BDBA06D8BD0F55224658679167BD50FD4AD9B0C1EF093F0B1E00BDBE226C87F9
+                    F76A387CB731721A004660C457E08CA1B06B373466BEB15AB317EA1B13DB540F
+                    8B318F19AFFEA94207A2A001F0E73C78BD94841F1763BE0CC0D0C1C86597C005
+                    A3A0AC342EF4FE71F48F4BD2EAEBB15A38569BD1BEA2955E59FB5459BBB6A550
+                    3E3B3D96DDA1F3E6955ABFEF024AC33305842183902BBF0723CF4E0D71C84BFC
+                    3FB068730BD49E80BA862EFB1164B26D2D7D14985308BFE336F344673F7886ED
+                    1B5E27C68C22E4213FF80E5C360E8C4914AC6B40B7ED429F5F03070E43340681
+                    0F56B3EB0F6DF3FAC5CA65CD9A48BEBE439E4F80CE7DE8EBB628F49A183382D3
+                    CA919B7E149FE71D581B1FF48A1761CBF67C7D05409052EA4367027B0A612FE7
+                    00E8DC8AE14158AA8C678602C8ED37C297CAFF737DF73EF4F14550B3B7006E26
+                    112AEA7AAE64632A1725BDA5A2C48659DD317800C245F16FDF47973D872E5F59
+                    1007D3F4FE8E54AE3A5E286BB93D01E5FA8C78A18B3A37E992BF20A3CFC5AE5A
+                    03EFA67F3A55B5DE88AC57B44A450F7836F4319EB541200344385F60BC45BF2F
+                    D03FBD3EBE8A999793CF19C83A09FA731EBA5ACA8A5F9064DD988F56BF07AD6D
+                    293A56A911E1512F08AF947FAE4C15E8844E9D5A1C3416CD1035776174CC67ED
+                    CA21F5ECED459B5E7A3D5B9FBB22AB00E82D1525F634F648C81B917801B4E63D
+                    68482C70546917D1FB4CA8F14FB914303AE9DA913EF6AB21A31FB3E9C57704B2
+                    FBC97020BB00BCF99307ECE6E173E4B81D96D07EF0089CF82851168E7AC87552
+                    F5C2B602F8D963380740ABAF0F132E3F86291AC8BEC17BED7A6FB428A28DCD29
+                    735EA1D6C39B2C55AB0E16DCE30263BA17F99470D91D18EF74B061CEF9F002F3
+                    E3E6BD5AA64D1C3C9220A64ABB8799F6BF3078C82600D6BB31E1FF92C673CD75
+                    953173DEC91D9D9B05B95FAA9EDF5918F77A1EA729A0BB6E2CA74FFF13206100
+                    6C1BB41F82D8495034D85F5AC993C3C76BCC1C0D85EBCFEFA9A56B4FE016806D
+                    E75D8B57B20A5302361A0F4072428EC89E60E1B08AD0B2D79EEB013F7B0CB742
+                    C83016DB0EB63DB34CB18EF0EEFE6835CB7273E499099BCF8846633304CE12C9
+                    EC97A2658829CE70B9A1CDB6AC9DBB6DAA7319EAFA04AC46B8B21B532FC9989A
+                    AB5D3BEECCE2B11B6F56784A444A73D1EFA0D96FA4C56F40F15EF107EDF961C5
+                    868A6EA7A26B123CBB7B11BBD1D156024BC76DBA5C9125F90E3E62DB69F1E36B
+                    2421985674EADC875CF41C03A0E5DD8BC8FB6EB612B12A0F8AE0752FD935AD7E
+                    F2369BDEE2A2E7180019D0BD0839AED074426E7A89F81A4D6AB1C35DF4DCEB80
+                    FF6214C5AA4D6C14095C745DA780C3068439DDCD56221636E7A2D719D5D43592
+                    2A4EEF145CA7405DF732C188EE65D258B6F657AA38DDAD8C3D6B9A64AF38ED1A
+                    B905C0B0AF5B1991294EB692B863FB944A23722B686B2EFA00BEC6D2F8C37E17
+                    5DD71DA19DC0555D09B46A70E1639B29BD67225D6E78A4E3B6AD93972FF966D5
+                    3A8CCE40380B6C5126D9C04AA931CCECDC16B3C909103CE3ED76E9DB2D00966D
+                    5D954C1F68EBBB2FFB4706F6893BB6D0C96612B7ED98540B3CD69DDC92B19B66
+                    2B890188D8D4986BA0552EFDBA4D81127915485B075769D3E6D5FEB17314865B
+                    98F7F45632DEBD7C59717E7558D1843DC1A86DC76A620A51884523C15A179B4E
+                    0190D135CD28EB3BB7F968FB3FFC8395D5FEFB13C1160388304A7D7EE6623317
+                    1A4B4FCD476464E7B6D6A03945CE206F54ECBFA931E5421AB2A9039EE9F8A341
+                    23C79647F71E3EA591C9C9422A3CBCE04D2ECEC2AE130BC76D9C88484279EB6B
+                    8C489066131659EA6AD73D000776FF1DCBA1FD41C3D6BFF907FBC6C48E4A2726
+                    50A2B0FAC9B739CBD976372CBCA472A4282F0009ABC0C658EAAFB355FDB07FFB
+                    8015AEB69D0320D3095EB7C77FF95A503B06E8726D20304402AA9E7A9B4B5CED
+                    6762E9D8CAF19EDA4A4106776E6F0D9A88D9D4D7839E09FDF6AEFDD39CDF1B66
+                    550A57B6D4FF590DD52EB2220C13CB86A7DFE4E7B924C615D584176CE1E1D8AD
+                    8FFC4193EE7CD446688AA5D639AA1C8E06E6896CFAC9FAC5C882B7F8965A3688
+                    B8EB0AEC56F89D78FCF5CE8BE9B2E059BE933EADEDCC04EE01CE01A0F66B07BD
+                    DF2C1609C267FA1AA32E7A32B5F6476D91179A3A7FE70CA7ECDFC9B7EC59F016
+                    BF47B93B5B3D551A8C61A35A2A5538A0700AC0088355395B2C93D570B940BF14
+                    E5E6019FF88F2CFEA0A9C1BF3075F02062163DF0AF1B6665EB534E01A8584F68
+                    68196B816FE7A29F0BAD4DD0F48917048BE66F2F3E7EC1B8848BCAD67E91F249
+                    D9CCFD0E723E20B1743B83A331DEA0E331ED21FC2834D541B4D3D082E76F7EAB
+                    78D715178318E040912D9A34BF66FA895CECE7754264D116865861ADC237F2B1
+                    938E58247ED7DB33648CD8B689EF96BC3C5B4241C9B4FB6AA61FCDB59FBC8FC8
+                    3CBD954141C06A03E373D1578D7F021F8258FC4E47DB20E866812CCADBC541D9
+                    35F7DED09AF9549503053925B6A29AF0272DFC5A2D3F75F97588B4C5EFAE1F05
+                    9B9ACFBA4415F50C8B079431F7AE69E47D4EA8A0C7E4166CE10A0B4F18616426
+                    99E67A6871AAD2D3201C3221E6FCE21A5EC9D1420A05DD139C7D29AF9E6C63B4
+                    2877021F245F8FB4E53878E5B817E25EB58C2AE4E0A1078FCAAEA826FC713357
+                    0ADCACCA5411C2752721DAC5CBA52462226C12C3B381CFB315D349DDF528009F
+                    CB61E9653B1818F39970E228530818A7304C61A011062A7822B4021F01473C8F
+                    1A552ABD30EBEEBF0A87BDC85E7AE9250F0A99038A8132A024E9530A789FF615
+                    EAF40D7CB64CEED8D7F6891F3CE8F80E8036E2FB919D3FAD907F0D00F905A02F
+                    300418040C00C28570280BA24003F115E50920A723F4B906E02260781EFA8546
+                    8163C0AE6C15732D840A7E60F18B229F3BD80718CA1737052240235FD0144847
+                    A6245842E6E4979C04D325C3E40458D024F86FDDF8A0B30C52789C0000000049
+                    454E44AE426082}
+                  FileName = 
+                    'C:\Users\well well\Desktop\Estudo TI\Projetos\ProjetoEx\assets\i' +
+                    'mgs\icons8-google-logo-64.png'
+                end>
+              Align = Left
+              Margins.Left = 10.000000000000000000
+              Position.X = 10.000000000000000000
+              Size.Width = 39.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+        end
+        object rectEmail: TRectangle
+          Align = Top
+          Fill.Color = xFF3D5AE8
+          Margins.Top = 40.000000000000000000
+          Position.Y = 150.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          OnClick = rectEmailClick
+          object btnAcessarEmail: TSpeedButton
+            Align = Client
+            Cursor = crHandPoint
+            StyledSettings = [Family]
+            Size.Width = 293.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Acessar com o e-mail'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            OnClick = btnAcessarEmailClick
+          end
+        end
+        object lblNovaConta: TLabel
+          Align = Bottom
+          Cursor = crHandPoint
+          StyledSettings = []
+          HitTest = True
+          Margins.Bottom = 20.000000000000000000
+          Position.Y = 216.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF0236DA
+          TextSettings.HorzAlign = Center
+          Text = 'J'#225' tem uma conta?'
+          TabOrder = 0
+          OnClick = lblNovaContaClick
+        end
+      end
+      object lblCriarConta: TLabel
+        Align = Bottom
+        Cursor = crHandPoint
+        StyledSettings = []
+        HitTest = True
+        Margins.Bottom = 30.000000000000000000
+        Position.Y = 713.000000000000000000
+        Size.Width = 318.000000000000000000
+        Size.Height = 47.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 
+          'Ao se inscrever, voc'#234' concorda com os Termos de Servi'#231'os e a Pol' +
+          #237'tica de Privacidade.'
+        TabOrder = 0
+      end
+      object Layout1: TLayout
+        Align = Top
+        Size.Width = 318.000000000000000000
+        Size.Height = 185.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+      end
+    end
+    object tabNovaConta: TTabItem
+      Tag = 1
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'tabNovaConta'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object Layout4: TLayout
+        Align = Center
+        Margins.Top = 60.000000000000000000
+        Size.Width = 293.000000000000000000
+        Size.Height = 524.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Label8: TLabel
+          Align = Top
+          StyledSettings = []
+          Margins.Top = 10.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = xFF1E1A19
+          TextSettings.HorzAlign = Center
+          Text = 'Criar uma conta'
+          TabOrder = 1
+        end
+        object Label9: TLabel
+          Align = Top
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 30.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 57.000000000000000000
+          Size.Width = 283.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          Text = 'Nome'
+          TabOrder = 8
+        end
+        object edtNome: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 9
+          TextSettings.Font.Size = 14.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 84.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 273.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object Label10: TLabel
+          Align = Top
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 30.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 324.000000000000000000
+          Size.Width = 283.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          Text = 'Senha'
+          TabOrder = 3
+        end
+        object edtSenhaCad: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 5
+          TextSettings.Font.Size = 14.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 351.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 273.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object rectCriarConta: TRectangle
+          Align = Bottom
+          Fill.Color = xFF663DE8
+          Position.Y = 397.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          object btnCriarConta: TSpeedButton
+            Align = Client
+            Cursor = crHandPoint
+            StyledSettings = [Family]
+            Size.Width = 293.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Criar minha conta'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            OnClick = btnCriarContaClick
+          end
+        end
+        object Label11: TLabel
+          Align = Top
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 30.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 146.000000000000000000
+          Size.Width = 283.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          Text = #218'ltimo nome'
+          TabOrder = 6
+        end
+        object edtUltimoNome: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 7
+          TextSettings.Font.Size = 14.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 173.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 273.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object edtEmailcad: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 4
+          TextSettings.Font.Size = 14.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 262.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 273.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object Label3: TLabel
+          Align = Top
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 30.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 235.000000000000000000
+          Size.Width = 283.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          Text = 'E-mail'
+          TabOrder = 2
+        end
+        object Label4: TLabel
+          Align = Bottom
+          Cursor = crHandPoint
+          StyledSettings = []
+          HitTest = True
+          Margins.Bottom = 30.000000000000000000
+          Position.Y = 447.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 47.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 11.000000000000000000
+          TextSettings.HorzAlign = Center
+          Text = 
+            'Ao se inscrever, voc'#234' concorda com os Termos de Servi'#231'os e a Pol' +
+            #237'tica de Privacidade.'
+          TabOrder = 0
+        end
+      end
+      object Rectangle2: TRectangle
+        Align = Bottom
+        Fill.Color = xFFF1F0F0
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 50.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 690.000000000000000000
+        Size.Width = 298.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 4.000000000000000000
+        YRadius = 4.000000000000000000
+        object btnconta: TSpeedButton
+          Align = Client
+          Cursor = crHandPoint
+          StyledSettings = [Family]
+          Margins.Left = 10.000000000000000000
+          Size.Width = 288.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'J'#225' tem uma conta?'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.Trimming = None
+          OnClick = btncontaClick
+        end
+      end
+      object lblExit: TLabel
+        Align = Client
+        StyledSettings = []
+        HitTest = True
+        Margins.Left = 10.000000000000000000
+        Margins.Bottom = 600.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 90.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF6C6867
+        Text = 'X'
+        TabOrder = 1
+        OnClick = lblExitClick
+      end
+    end
+    object tabEntrarComEmail: TTabItem
+      Tag = 2
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'tabEmail'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object Layout6: TLayout
+        Align = Center
+        Size.Width = 293.000000000000000000
+        Size.Height = 396.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Label14: TLabel
+          Align = Top
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 30.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 146.000000000000000000
+          Size.Width = 283.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          Text = 'Senha'
+          TabOrder = 2
+        end
+        object edtSenha: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 3
+          Password = True
+          TextSettings.Font.Size = 14.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 173.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 273.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object rectEntrar: TRectangle
+          Align = Top
+          Fill.Color = xFF663DE8
+          Margins.Top = 20.000000000000000000
+          Position.Y = 225.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          object btnEntrar: TSpeedButton
+            Align = Client
+            Cursor = crHandPoint
+            StyledSettings = [Family]
+            Size.Width = 293.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Entrar'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.Trimming = None
+            OnClick = btnEntrarClick
+          end
+        end
+        object Label15: TLabel
+          Align = Top
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 30.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 57.000000000000000000
+          Size.Width = 283.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          Text = 'E-mail'
+          TabOrder = 4
+        end
+        object edtEmail: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 5
+          TextSettings.Font.Size = 14.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 84.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 273.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object lblNewConta: TLabel
+          Align = Bottom
+          Cursor = crHandPoint
+          StyledSettings = []
+          HitTest = True
+          Margins.Bottom = 100.000000000000000000
+          Position.Y = 279.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF0236DA
+          TextSettings.HorzAlign = Center
+          Text = 'Precisa de uma conta?'
+          TabOrder = 0
+          OnClick = lblNewContaClick
+        end
+        object Label2: TLabel
+          Align = Top
+          StyledSettings = []
+          Margins.Top = 10.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = xFF1E1A19
+          TextSettings.HorzAlign = Center
+          Text = 'Entrar com o e-mail'
+          TabOrder = 1
+        end
+      end
+      object Rectangle1: TRectangle
+        Align = Bottom
+        Fill.Color = xFF3D5AE8
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 30.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 710.000000000000000000
+        Size.Width = 278.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 4.000000000000000000
+        YRadius = 4.000000000000000000
+        object SpeedButton2: TSpeedButton
+          Align = Client
+          Cursor = crHandPoint
+          StyledSettings = [Family]
+          Size.Width = 278.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Acessar com o Facebook'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.Trimming = None
+          object Image3: TImage
+            MultiResBitmap.Width = 48
+            MultiResBitmap = <
+              item
+                Width = 48
+                Height = 48
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                  870000000473424954080808087C0864880000049A494441546881ED984D685C
+                  5514C7FFE7BE99C957D35453433333010D96C618AC6864D455A1C565358B06C5
+                  284A92B118ABA2BBA21845B7856229E60B512CAEEAA67163C185602B94B6B4A4
+                  214641DA64D26893694DA6F998997B8E8BA4DA64EE7BF3DE9B194199DFF2DC7B
+                  BEDE3BE7DDF32E50A64C99FF34542C43C191E9DD5A632F917A52447611A109A0
+                  2D6BAB9212C135229A14E2B316E1FB4C77F45231FC1696C0C88D5AC5AB7125E8
+                  16A2873C39161E67D008674283E86B48F90DC15F02FD1250D1C421627A0F847B
+                  FD3A5F675E401F73A2F118FA29EB55D97B0203332D4AC9D7043CEA59D701615C
+                  E4005E4077E4672F7A9E12B00613FB4172E29FDA2E32228B50F4A2EE899C72AB
+                  A2DC6EB486675E02C9C992050F0044B510F9C61A9AE972ADE266D3FA933F0950
+                  C07F745E902C041D3A1E1DCDB7337F029F4DEDB4149D07516D2121550508E16A
+                  0B7521C2525690D6823F5618A98CD868484AB37A02AF85279CEC3A27D02F0115
+                  9939E7B76109C081E62ABCDE5A835843104195EBAEE37412A7AEAE18F5057281
+                  139198D3D7C9B12454347188847C051F54842FF66C43677395E33EA72748A0C7
+                  54F87A1F03476D63B4D5FE72B6860487F3466AC347EDB57983770391BC8F911B
+                  B6E56B9B805ACD1E0468BB1FA78DD516DE6AABF1A36AA25EE9D55EBB45DB125A
+                  1B0FFC793CD05C8990A1DE6FA519C7C76F632AA5FF965D9ACFE4B5A720DD0C1C
+                  31AD1913088E4CEF66F636DBDC4DECBE9051FEEC7749FC389BF66C4F48B58686
+                  67DBD23D3BC636AF194B4833F679F672174D5BAC1CD95832E32BF83B6499F79A
+                  E4C604082AE6DB1380BA50AED9CB49CF73DA0648E42993DC9880405A0A716619
+                  7A27B9CA85988428EC32C96DDE00C20579330550A03E41A226B9F9332A28686C
+                  280DE651A6E0E1EC83C76BF146EBC66FFE56430FC45BAAD1F560EEC1B667740E
+                  576EFAEF0F7302844500F56E0C5459847B2AF24FE51516A16253730880DF16B5
+                  5921075934496D9A18332EAD16C4B594C652D65D770868DA24B76962721C618B
+                  C5E49FEE4B8718C65F4DF31B10FEC9674C9E98B8E53E015174C624374E3BA1A1
+                  A9473494AB7B9BAA00A172536D9FD9BF1D3BEB36B6D7D0C4120E9F5BD8205BCE
+                  0A56B4BB12B244B5A5E38D5736CB8D4D9CEE6DBAAC06A6C748515B3EC3CB59C1
+                  F2A63A36C5B4A205377D1E66243C9E8E477282079CFE07089FFBF2560258D1B0
+                  DD9A6D025C19180064AE342179629E574343768BF66FE0E51DB705EA939284E4
+                  01117CE874F5E8780271A2F198302E163F2C7708F83C6F0B1F77DAE37C84F653
+                  962DEE84F082E3BE92202966AB0B9DE47854E79F017A9A7E85525D801436D07B
+                  42B2203C9FEF4E087079B5B87657A95EFD7792902C44BDA27BA2DFBAD9EDFA6E
+                  54F786BF82A003621EAA8A82F00208CFE978F8845B15D70900808E474735D02E
+                  900BDEA37346C0E735A3DDED93BF83A7040000F1E824272231117A1BC0BC67FD
+                  1C644E046F725D3486834DBF78D5F69E00B0F6758A878FEA74F07E11795700E3
+                  31EF84B08C09C93B3A1D7A80E3914FF37D6DEC28EC8FACAF21B57EE174243478
+                  FDE12C641F913C7D35A59FA909606B7DA5A50020B9A23995D1BF83F183109DE5
+                  009D466FE37841BECB9429F3FFE02F73EBA1E9F8D59F120000000049454E44AE
+                  426082}
+                FileName = 
+                  'C:\Users\well well\Desktop\Estudo TI\Projetos\ProjetoEx\assets\i' +
+                  'mgs\logoFacebook.png'
+              end>
+            Align = Left
+            Margins.Left = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Size.Width = 39.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+      end
+      object Rectangle4: TRectangle
+        Align = Bottom
+        Fill.Color = xFF3D5AE8
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 650.000000000000000000
+        Size.Width = 278.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 4.000000000000000000
+        YRadius = 4.000000000000000000
+        object SpeedButton3: TSpeedButton
+          Align = Client
+          Cursor = crHandPoint
+          StyledSettings = [Family]
+          Size.Width = 278.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Acessar com o Google'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.Trimming = None
+          object Image5: TImage
+            MultiResBitmap.Height = 64
+            MultiResBitmap.Width = 64
+            MultiResBitmap = <
+              item
+                Width = 64
+                Height = 64
+                PNG = {
+                  89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+                  DE0000000473424954080808087C0864880000091E49444154789CED9A798C95
+                  D515C07FE77E6FDE2CAC6341A0D252AD228AD6144404A1D2C5B4A0B16A234123
+                  D5B8204DC0886D71AD4ED236A94D6A6D6A1559238D6D85168DA22488B2CC4851
+                  59843A03B22F3A20A2B32FEFBDEFBBA77F3CC7CEDB66EE5B46DB747EC9CB9BB9
+                  DF39E79E7BBEEF9E77EEFD2EF4D24B2FBDF4D24B2FBDFC9F229F47273AEB8161
+                  41D8FBAE787682F18AC604468780E90FD24FC400B645AD6DC6B747C5FABB7447
+                  F5AB9EEA3A79E3C5A69EF6ADC702A0B36695D9E2D367AA676E9270D1A5022127
+                  BDBA06D8BD0F55224658679167BD50FD4AD9B0C1EF093F0B1E00BDBE226C87F9
+                  F76A387CB731721A004660C457E08CA1B06B373466BEB15AB317EA1B13DB540F
+                  8B318F19AFFEA94207A2A001F0E73C78BD94841F1763BE0CC0D0C1C86597C005
+                  A3A0AC342EF4FE71F48F4BD2EAEBB15A38569BD1BEA2955E59FB5459BBB6A550
+                  3E3B3D96DDA1F3E6955ABFEF024AC33305842183902BBF0723CF4E0D71C84BFC
+                  3FB068730BD49E80BA862EFB1164B26D2D7D14985308BFE336F344673F7886ED
+                  1B5E27C68C22E4213FF80E5C360E8C4914AC6B40B7ED429F5F03070E43340681
+                  0F56B3EB0F6DF3FAC5CA65CD9A48BEBE439E4F80CE7DE8EBB628F49A183382D3
+                  CA919B7E149FE71D581B1FF48A1761CBF67C7D05409052EA4367027B0A612FE7
+                  00E8DC8AE14158AA8C678602C8ED37C297CAFF737DF73EF4F14550B3B7006E26
+                  112AEA7AAE64632A1725BDA5A2C48659DD317800C245F16FDF47973D872E5F59
+                  1007D3F4FE8E54AE3A5E286BB93D01E5FA8C78A18B3A37E992BF20A3CFC5AE5A
+                  03EFA67F3A55B5DE88AC57B44A450F7836F4319EB541200344385F60BC45BF2F
+                  D03FBD3EBE8A999793CF19C83A09FA731EBA5ACA8A5F9064DD988F56BF07AD6D
+                  293A56A911E1512F08AF947FAE4C15E8844E9D5A1C3416CD1035776174CC67ED
+                  CA21F5ECED459B5E7A3D5B9FBB22AB00E82D1525F634F648C81B917801B4E63D
+                  68482C70546917D1FB4CA8F14FB914303AE9DA913EF6AB21A31FB3E9C57704B2
+                  FBC97020BB00BCF99307ECE6E173E4B81D96D07EF0089CF82851168E7AC87552
+                  F5C2B602F8D963380740ABAF0F132E3F86291AC8BEC17BED7A6FB428A28DCD29
+                  735EA1D6C39B2C55AB0E16DCE30263BA17F99470D91D18EF74B061CEF9F002F3
+                  E3E6BD5AA64D1C3C9220A64ABB8799F6BF3078C82600D6BB31E1FF92C673CD75
+                  953173DEC91D9D9B05B95FAA9EDF5918F77A1EA729A0BB6E2CA74FFF13206100
+                  6C1BB41F82D8495034D85F5AC993C3C76BCC1C0D85EBCFEFA9A56B4FE016806D
+                  E75D8B57B20A5302361A0F4072428EC89E60E1B08AD0B2D79EEB013F7B0CB742
+                  C83016DB0EB63DB34CB18EF0EEFE6835CB7273E499099BCF8846633304CE12C9
+                  EC97A2658829CE70B9A1CDB6AC9DBB6DAA7319EAFA04AC46B8B21B532FC9989A
+                  AB5D3BEECCE2B11B6F56784A444A73D1EFA0D96FA4C56F40F15EF107EDF961C5
+                  868A6EA7A26B123CBB7B11BBD1D156024BC76DBA5C9125F90E3E62DB69F1E36B
+                  2421985674EADC875CF41C03A0E5DD8BC8FB6EB612B12A0F8AE0752FD935AD7E
+                  F2369BDEE2A2E7180019D0BD0839AED074426E7A89F81A4D6AB1C35DF4DCEB80
+                  FF6214C5AA4D6C14095C745DA780C3068439DDCD56221636E7A2D719D5D43592
+                  2A4EEF145CA7405DF732C188EE65D258B6F657AA38DDAD8C3D6B9A64AF38ED1A
+                  B905C0B0AF5B1991294EB692B863FB944A23722B686B2EFA00BEC6D2F8C37E17
+                  5DD71DA19DC0555D09B46A70E1639B29BD67225D6E78A4E3B6AD93972FF966D5
+                  3A8CCE40380B6C5126D9C04AA931CCECDC16B3C909103CE3ED76E9DB2D00966D
+                  5D954C1F68EBBB2FFB4706F6893BB6D0C96612B7ED98540B3CD69DDC92B19B66
+                  2B890188D8D4986BA0552EFDBA4D81127915485B075769D3E6D5FEB17314865B
+                  98F7F45632DEBD7C59717E7558D1843DC1A86DC76A620A51884523C15A179B4E
+                  0190D135CD28EB3BB7F968FB3FFC8395D5FEFB13C1160388304A7D7EE6623317
+                  1A4B4FCD476464E7B6D6A03945CE206F54ECBFA931E5421AB2A9039EE9F8A341
+                  23C79647F71E3EA591C9C9422A3CBCE04D2ECEC2AE130BC76D9C88484279EB6B
+                  8C489066131659EA6AD73D000776FF1DCBA1FD41C3D6BFF907FBC6C48E4A2726
+                  50A2B0FAC9B739CBD976372CBCA472A4282F0009ABC0C658EAAFB355FDB07FFB
+                  8015AEB69D0320D3095EB7C77FF95A503B06E8726D20304402AA9E7A9B4B5CED
+                  6762E9D8CAF19EDA4A4106776E6F0D9A88D9D4D7839E09FDF6AEFDD39CDF1B66
+                  550A57B6D4FF590DD52EB2220C13CB86A7DFE4E7B924C615D584176CE1E1D8AD
+                  8FFC4193EE7CD446688AA5D639AA1C8E06E6896CFAC9FAC5C882B7F8965A3688
+                  B8EB0AEC56F89D78FCF5CE8BE9B2E059BE933EADEDCC04EE01CE01A0F66B07BD
+                  DF2C1609C267FA1AA32E7A32B5F6476D91179A3A7FE70CA7ECDFC9B7EC59F016
+                  BF47B93B5B3D551A8C61A35A2A5538A0700AC0088355395B2C93D570B940BF14
+                  E5E6019FF88F2CFEA0A9C1BF3075F02062163DF0AF1B6665EB534E01A8584F68
+                  68196B816FE7A29F0BAD4DD0F48917048BE66F2F3E7EC1B8848BCAD67E91F249
+                  D9CCFD0E723E20B1743B83A331DEA0E331ED21FC2834D541B4D3D082E76F7EAB
+                  78D715178318E040912D9A34BF66FA895CECE7754264D116865861ADC237F2B1
+                  938E58247ED7DB33648CD8B689EF96BC3C5B4241C9B4FB6AA61FCDB59FBC8FC8
+                  3CBD954141C06A03E373D1578D7F021F8258FC4E47DB20E866812CCADBC541D9
+                  35F7DED09AF9549503053925B6A29AF0272DFC5A2D3F75F97588B4C5EFAE1F05
+                  9B9ACFBA4415F50C8B079431F7AE69E47D4EA8A0C7E4166CE10A0B4F18616426
+                  99E67A6871AAD2D3201C3221E6FCE21A5EC9D1420A05DD139C7D29AF9E6C63B4
+                  2877021F245F8FB4E53878E5B817E25EB58C2AE4E0A1078FCAAEA826FC713357
+                  0ADCACCA5411C2752721DAC5CBA52462226C12C3B381CFB315D349DDF528009F
+                  CB61E9653B1818F39970E228530818A7304C61A011062A7822B4021F01473C8F
+                  1A552ABD30EBEEBF0A87BDC85E7AE9250F0A99038A8132A024E9530A789FF615
+                  EAF40D7CB64CEED8D7F6891F3CE8F80E8036E2FB919D3FAD907F0D00F905A02F
+                  300418040C00C28570280BA24003F115E50920A723F4B906E02260781EFA8546
+                  8163C0AE6C15732D840A7E60F18B229F3BD80718CA1737052240235FD0144847
+                  A6245842E6E4979C04D325C3E40458D024F86FDDF8A0B30C52789C0000000049
+                  454E44AE426082}
+                FileName = 
+                  'C:\Users\well well\Desktop\Estudo TI\Projetos\ProjetoEx\assets\i' +
+                  'mgs\icons8-google-logo-64.png'
+              end>
+            Align = Left
+            Margins.Left = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Size.Width = 39.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+      end
+      object lblExit1: TLabel
+        Align = Client
+        StyledSettings = []
+        HitTest = True
+        Margins.Left = 10.000000000000000000
+        Margins.Bottom = 600.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF6C6867
+        Text = 'X'
+        TabOrder = 1
+        OnClick = lblExit1Click
+      end
+    end
+  end
+end
