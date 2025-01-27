@@ -5,11 +5,10 @@
         <FrameworkType>FMX</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Android64</Platform>
         <TargetedPlatforms>693267</TargetedPlatforms>
         <AppType>Application</AppType>
         <MainSource>AppEx.dpr</MainSource>
-        <ProjectName Condition="'$(ProjectName)'==''">AppEx</ProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -57,6 +56,18 @@
     <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Android' and '$(Cfg_1)'=='true') or '$(Cfg_1_Android)'!=''">
+        <Cfg_1_Android>true</Cfg_1_Android>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Android64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Android64)'!=''">
+        <Cfg_1_Android64>true</Cfg_1_Android64>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
@@ -275,6 +286,28 @@
         <DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
         <DCC_RangeChecking>true</DCC_RangeChecking>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Android)'!=''">
+        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Keys>package=com.appEx.loginapp;label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
+        <IncludeAndroid_AdaptiveIcon>true</IncludeAndroid_AdaptiveIcon>
+        <IncludeAndroid_VectorizedSplash>true</IncludeAndroid_VectorizedSplash>
+        <Android_BackgroundColor>#FFFFFF</Android_BackgroundColor>
+        <Android_DarkBackgroundColor>#000000</Android_DarkBackgroundColor>
+        <IncludeAndroid_NotificationAccentColor>false</IncludeAndroid_NotificationAccentColor>
+        <Android_NotificationAccentColor>#000000</Android_NotificationAccentColor>
+        <IncludeAndroid_VectorizedNotificationIcon>true</IncludeAndroid_VectorizedNotificationIcon>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Android64)'!=''">
+        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Keys>package=com.appEx.loginapp;label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
+        <IncludeAndroid_AdaptiveIcon>true</IncludeAndroid_AdaptiveIcon>
+        <IncludeAndroid_VectorizedSplash>true</IncludeAndroid_VectorizedSplash>
+        <Android_BackgroundColor>#FFFFFF</Android_BackgroundColor>
+        <Android_DarkBackgroundColor>#000000</Android_DarkBackgroundColor>
+        <IncludeAndroid_NotificationAccentColor>false</IncludeAndroid_NotificationAccentColor>
+        <Android_NotificationAccentColor>#000000</Android_NotificationAccentColor>
+        <IncludeAndroid_VectorizedNotificationIcon>true</IncludeAndroid_VectorizedNotificationIcon>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -315,6 +348,10 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="..\ultils\utilsLoadig.pas"/>
+        <DCCReference Include="Login\loginFacebook.pas">
+            <Form>frmLoginFacebook</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -1773,6 +1810,7 @@
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
             </Platforms>
+            <ModelSupport>False</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

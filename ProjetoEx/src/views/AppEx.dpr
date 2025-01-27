@@ -7,7 +7,8 @@ uses
   dmUsuario in '..\model\dmUsuario.pas' {dm: TDataModule},
   usuarioClass in '..\model\usuarioClass.pas',
   mainClientes in 'mainClientes\mainClientes.pas' {frmClientes},
-  utilsLoadig in '..\ultils\utilsLoadig.pas';
+  utilsLoadig in '..\ultils\utilsLoadig.pas',
+  loginFacebook in 'Login\loginFacebook.pas' {frmLoginFacebook};
 
 {$R *.res}
 
@@ -16,5 +17,6 @@ begin
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TfrmLoginFacebook, frmLoginFacebook);
   Application.Run;
 end.
