@@ -66,6 +66,7 @@ object frmLogin: TfrmLogin
             TextSettings.Font.StyleExt = {00060000000000000004000000}
             TextSettings.FontColor = claWhite
             TextSettings.Trimming = None
+            OnClick = btnAcessarFacebookClick
             object Image1: TImage
               MultiResBitmap.Width = 48
               MultiResBitmap = <
@@ -257,7 +258,6 @@ object frmLogin: TfrmLogin
           Stroke.Kind = None
           XRadius = 4.000000000000000000
           YRadius = 4.000000000000000000
-          OnClick = rectEmailClick
           object btnAcessarEmail: TSpeedButton
             Align = Client
             Cursor = crHandPoint
@@ -930,5 +930,34 @@ object frmLogin: TfrmLogin
         OnClick = lblExit1Click
       end
     end
+  end
+  object OAuth2_Facebook: TOAuth2Authenticator
+    AuthorizationEndpoint = 'https://www.facebook.com/dialog/oauth'
+    Left = 198
+    Top = 32
+  end
+  object RESTClient: TRESTClient
+    Authenticator = OAuth2_Facebook
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'UTF-8, *;q=0.8'
+    Params = <>
+    RaiseExceptionOn500 = False
+    SynchronizedEvents = False
+    Left = 184
+    Top = 168
+  end
+  object RESTRequest: TRESTRequest
+    Client = RESTClient
+    Params = <>
+    Response = RESTResponse
+    OnAfterExecute = RESTRequestAfterExecute
+    SynchronizedEvents = False
+    Left = 40
+    Top = 16
+  end
+  object RESTResponse: TRESTResponse
+    ContentType = 'application/json'
+    Left = 200
+    Top = 96
   end
 end

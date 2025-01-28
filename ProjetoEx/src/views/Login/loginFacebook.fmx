@@ -32,11 +32,12 @@ object frmLoginFacebook: TfrmLoginFacebook
       TabOrder = 1
     end
   end
-  object WebBrowser1: TWebBrowser
+  object WebBrowser: TWebBrowser
     Align = Client
     Size.Width = 256.000000000000000000
     Size.Height = 637.000000000000000000
     Size.PlatformDefault = False
     WindowsEngine = IEOnly
+    OnDidFinishLoad = WebBrowserDidFinishLoad
   end
 end

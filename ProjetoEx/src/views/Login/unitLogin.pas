@@ -13,10 +13,33 @@ uses
   FMX.Objects,
   FMX.StdCtrls,
   FMX.Layouts,
-  FMX.TabControl, usuarioClass, utilsLoadig, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
-  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.StorageBin, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FMX.Controls.Presentation;
+  FMX.TabControl,
+  usuarioClass,
+  utilsLoadig,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.StorageBin,
+  Data.DB,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+  FMX.Controls.Presentation,
+  REST.Authenticator.OAuth.WebForm.FMX,
+  REST.Types,
+  REST.Client,
+  Data.Bind.Components,
+  Data.Bind.ObjectScope,
+  REST.Authenticator.OAuth,
+  REST.Utils,
+  loginFacebook,
+  System.UITypes,
+  System.JSON,
+  Web.HTTPApp,
+  RESTRequest4D;
 
 type
   TfrmLogin = class(TForm)
@@ -68,6 +91,10 @@ type
     btnconta: TSpeedButton;
     lblExit1: TLabel;
     lblExit: TLabel;
+    OAuth2_Facebook: TOAuth2Authenticator;
+    RESTClient: TRESTClient;
+    RESTRequest: TRESTRequest;
+    RESTResponse: TRESTResponse;
     procedure btnEntrarClick(Sender: TObject);
     procedure lblNovaContaClick(Sender: TObject);
     procedure lblNewContaClick(Sender: TObject);
@@ -77,6 +104,8 @@ type
     procedure btnAcessarEmailClick(Sender: TObject);
     procedure rectEmailClick(Sender: TObject);
     procedure btnCriarContaClick(Sender: TObject);
+    procedure btnAcessarFacebookClick(Sender: TObject);
+    procedure RESTRequestAfterExecute(Sender: TCustomRESTRequest);
   private
     { Private declarations }
 
@@ -84,6 +113,7 @@ type
     procedure TerminateCadastro(sender:TObject);
   public
     { Public declarations }
+     FAccessToken : string;
   end;
 
 var
@@ -146,6 +176,62 @@ begin
    Tabcontrol.GotoVisibleTab(2);
 end;
 
+procedure TfrmLogin.RESTRequestAfterExecute(Sender: TCustomRESTRequest);
+var
+  LJsonObj: TJSONObject;
+  msg, email, nome, user_id: string;
+  response: IResponse;
+  jsonRequest: TJSONObject;
+begin
+  try
+    if Assigned(RESTResponse.JSONValue) then
+    begin
+      LJsonObj := RESTResponse.JSONValue as TJSONObject;
+      email := LJsonObj.GetValue<string>('email', '');
+      nome := LJsonObj.GetValue<string>('first_name', '') + ' ' + LJsonObj.GetValue<string>('last_name', '');
+      user_id := LJsonObj.GetValue<string>('id', '');
+
+      // Cria JSON para envio ao backend
+      jsonRequest := TJSONObject.Create;
+      try
+        jsonRequest.AddPair('email', email);
+        jsonRequest.AddPair('first_name', nome);
+        jsonRequest.AddPair('provider', 'Facebook');
+        jsonRequest.AddPair('provider_id', user_id);
+
+        // Envia ao backend
+        response := TRequest.New
+          .BaseURL('http://localhost:3000')  // URL do backend
+          .Resource('/usuarios/register')  // Rota para login do Facebook
+          .AddBody(jsonRequest.ToString, TRESTContentType.ctAPPLICATION_JSON)
+          .Accept('application/json')
+          .Post;
+
+        if response.StatusCode = 200 then
+        begin
+          // Login bem-sucedido
+          if not Assigned(frmClientes) then
+            Application.CreateForm(TfrmClientes, frmClientes);
+          frmClientes.Show;
+        end
+        else
+        begin
+          ShowMessage('Erro ao fazer login: ' + response.Content);
+        end;
+      finally
+        jsonRequest.Free;
+      end;
+    end
+    else
+    begin
+      ShowMessage('Erro ao obter dados do Facebook.');
+    end;
+  except
+    on E: Exception do
+      ShowMessage('Erro: ' + E.Message);
+  end;
+end;
+
 procedure TfrmLogin.lblNewContaClick(Sender: TObject);
 begin
   Tabcontrol.GotoVisibleTab(1);
@@ -154,6 +240,48 @@ end;
 procedure TfrmLogin.btnAcessarEmailClick(Sender: TObject);
 begin
  Tabcontrol.GotoVisibleTab(2);
+end;
+
+procedure TfrmLogin.btnAcessarFacebookClick(Sender: TObject);
+var
+  id_aplicativo, LURL: string;
+begin
+  try
+    FAccessToken := '';
+    id_aplicativo := '9083636655052448'; // ID do aplicativo no Facebook
+
+    // URL de autenticação ajustada
+    LURL := 'https://www.facebook.com/v16.0/dialog/oauth'
+            + '?client_id=' + URIEncode(id_aplicativo)
+            + '&redirect_uri=' + URIEncode('https://localhost')
+            + '&response_type=token'
+            + '&scope=' + URIEncode('public_profile,email')
+            + '&auth_type=rerequest'
+            + '&prompt=login'; // Força exibição de login
+
+    frmLoginFacebook := TfrmLoginFacebook.Create(nil);
+    frmLoginFacebook.WebBrowser.Navigate(LURL);
+    frmLoginFacebook.ShowModal(
+      procedure(ModalResult: TModalResult)
+      begin
+        if FAccessToken <> '' then
+        begin
+          RESTRequest.ResetToDefaults;
+          RESTClient.ResetToDefaults;
+          RESTResponse.ResetToDefaults;
+
+          RESTClient.BaseURL := 'https://graph.facebook.com';
+          RESTClient.Authenticator := OAuth2_Facebook;
+          RESTRequest.Resource := 'me?fields=first_name,last_name,email,picture.height(150)';
+          OAuth2_Facebook.AccessToken := FAccessToken;
+
+          RESTRequest.Execute;
+        end;
+      end);
+  except
+    on E: Exception do
+      ShowMessage('Erro de comunicação: ' + E.Message);
+  end;
 end;
 
 procedure TfrmLogin.btncontaClick(Sender: TObject);
