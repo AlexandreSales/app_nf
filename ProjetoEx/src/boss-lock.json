@@ -1,0 +1,14 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2025-01-28T19:57:52.3808326-03:00",
+	"installedModules": {
+		"github.com/hashload/facebook-login": {
+			"name": "facebook-login",
+			"version": "0.1.0",
+			"hash": "cb5b841e3e67efea2de4032851e3fff4",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}

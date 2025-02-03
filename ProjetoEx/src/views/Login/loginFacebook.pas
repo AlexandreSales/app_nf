@@ -24,10 +24,11 @@ type
 type
   TfrmLoginFacebook = class(TForm)
     Rectangle1: TRectangle;
-    WebBrowser: TWebBrowser;
     lblExit: TLabel;
-    procedure WebBrowserDidFinishLoad(ASender: TObject);
+    WebBrowser: TWebBrowser;
     procedure lblExitClick(Sender: TObject);
+
+    procedure WebBrowserDidFinishLoad(ASender: TObject);
   private
     FOnBeforeRedirect: TWebFormRedirectEvent;
     { Private declarations }
@@ -45,51 +46,7 @@ implementation
 uses unitLogin;
 
 
-procedure Facebook_AccessTokenRedirect(const AURL: string; var DoCloseWebView: boolean);
-var
-      LATPos: integer;
-      LToken: string;
-begin
-        try
-                LATPos := Pos('access_token=', AURL);
 
-                if (LATPos > 0) then
-                begin
-                        LToken := Copy(AURL, LATPos + 13, Length(AURL));
-
-                        if (Pos('&', LToken) > 0) then
-                        begin
-                                LToken := Copy(LToken, 1, Pos('&', LToken) - 1);
-                        end;
-
-                        frmLogin.FAccessToken := LToken;
-
-                        if (LToken <> '') then
-                        begin
-                                DoCloseWebView := True;
-                        end;
-                end
-                else
-                begin
-                        LATPos := Pos('api_key=', AURL);
-
-                        if LATPos <= 0 then
-                        begin
-                                LATPos := Pos('access_denied', AURL);
-
-                                if (LATPos > 0) then
-                                begin
-                                        // Acesso negado, cancelado ou usuário não permitiu o acesso...
-                                        frmLogin.FAccessToken := '';
-                                        DoCloseWebView := True;
-                                end;
-                        end;
-                end;
-      except
-        on E: Exception do
-          ShowMessage(E.Message);
-      END;
-    end;
 
 procedure TfrmLoginFacebook.lblExitClick(Sender: TObject);
 begin
@@ -97,26 +54,31 @@ begin
   ModalResult := mrOk;
 end;
 
+
 procedure TfrmLoginFacebook.WebBrowserDidFinishLoad(ASender: TObject);
 var
   CloseWebView: Boolean;
   URL: string;
+  WebBrowser: TWebBrowser;
 begin
-  URL := TWebBrowser(ASender).URL;
+    if not (ASender is TWebBrowser) then
+    Exit;
+
+  WebBrowser := TWebBrowser(ASender);
+  URL := WebBrowser.URL;
   CloseWebView := False;
 
-  if URL <> '' then
-    Facebook_AccessTokenRedirect(URL, CloseWebView);
 
   // Fechar o navegador e o formulário somente após o login
   if CloseWebView then
   begin
-    // Quando o token for encontrado, feche a tela
-    TWebBrowser(ASender).Stop;
-    TWebBrowser(ASender).URL := '';
-    ModalResult := mrOk;  // Fechar o formulário
+    WebBrowser.Stop;
+    WebBrowser.URL := '';
+    Application.Terminate;  // Encerra toda a aplicação
   end;
 end;
+
+
 
 
 end.

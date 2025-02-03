@@ -1,0 +1,11 @@
+{
+	"name": "appex",
+	"description": "",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./src",
+	"projects": [],
+	"dependencies": {
+		"github.com/hashload/facebook-login": "^0.1.0"
+	}
+}

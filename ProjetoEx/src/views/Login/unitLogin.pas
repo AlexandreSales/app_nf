@@ -1,3 +1,4 @@
+
 unit unitLogin;
 
 interface
@@ -39,7 +40,7 @@ uses
   System.UITypes,
   System.JSON,
   Web.HTTPApp,
-  RESTRequest4D;
+  RESTRequest4D, REST.Response.Adapter;
 
 type
   TfrmLogin = class(TForm)
@@ -95,6 +96,7 @@ type
     RESTClient: TRESTClient;
     RESTRequest: TRESTRequest;
     RESTResponse: TRESTResponse;
+    RESTResponseDataSetAdapter: TRESTResponseDataSetAdapter;
     procedure btnEntrarClick(Sender: TObject);
     procedure lblNovaContaClick(Sender: TObject);
     procedure lblNewContaClick(Sender: TObject);
@@ -109,11 +111,14 @@ type
   private
     { Private declarations }
 
+
     procedure TerminateLoading(sender:TObject);
     procedure TerminateCadastro(sender:TObject);
+    procedure Facebook_AccessTokenRedirect(const AURL: string; var DoCloseWebView: boolean);
   public
+    FAccessToken : string;
     { Public declarations }
-     FAccessToken : string;
+
   end;
 
 var
@@ -134,6 +139,47 @@ begin
     end,
     TerminateLoading);
 end;
+
+
+
+procedure TfrmLogin.Facebook_AccessTokenRedirect(const AURL: string;
+  var DoCloseWebView: Boolean);
+var
+  LATPos: Integer;
+  LToken: string;
+begin
+  try
+    LATPos := Pos('access_token=', AURL);
+
+    if (LATPos > 0) then
+    begin
+      LToken := Copy(AURL, LATPos + 13, Length(AURL));
+
+      if (Pos('&', LToken) > 0) then
+        LToken := Copy(LToken, 1, Pos('&', LToken) - 1);
+
+      FAccessToken := LToken;
+
+      if LToken <> '' then
+      begin
+        DoCloseWebView := True; // Fecha a tela apenas se houver um token válido
+      end;
+    end
+    else if Pos('access_denied', AURL) > 0 then
+    begin
+      FAccessToken := '';
+      DoCloseWebView := True; // Fecha apenas se o usuário negar acesso
+    end
+    else
+    begin
+      DoCloseWebView := False; // Mantém a tela aberta caso a URL ainda não contenha resposta
+    end;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao processar token: ' + E.Message);
+  end;
+end;
+
 
 procedure TfrmLogin.TerminateCadastro(sender: TObject);
 begin
@@ -179,7 +225,7 @@ end;
 procedure TfrmLogin.RESTRequestAfterExecute(Sender: TCustomRESTRequest);
 var
   LJsonObj: TJSONObject;
-  msg, email, nome, user_id: string;
+  email, nome, user_id: string;
   response: IResponse;
   jsonRequest: TJSONObject;
 begin
@@ -246,21 +292,23 @@ procedure TfrmLogin.btnAcessarFacebookClick(Sender: TObject);
 var
   id_aplicativo, LURL: string;
 begin
-  try
+   try
     FAccessToken := '';
     id_aplicativo := '9083636655052448'; // ID do aplicativo no Facebook
 
     // URL de autenticação ajustada
-    LURL := 'https://www.facebook.com/v16.0/dialog/oauth'
+    LURL := 'https://www.facebook.com/v22.0/dialog/oauth'
             + '?client_id=' + URIEncode(id_aplicativo)
-            + '&redirect_uri=' + URIEncode('https://localhost')
             + '&response_type=token'
-            + '&scope=' + URIEncode('public_profile,email')
+            + '&scope=' + URIEncode('user_about_me,email') //public_profile
+            + '&redirect_uri=' + URIEncode('https://www.facebook.com/connect/login_success.html') // URL de redirecionamento válida
             + '&auth_type=rerequest'
             + '&prompt=login'; // Força exibição de login
 
     frmLoginFacebook := TfrmLoginFacebook.Create(nil);
+    frmLoginFacebook.OnBeforeRedirect := Facebook_AccessTokenRedirect;
     frmLoginFacebook.WebBrowser.Navigate(LURL);
+
     frmLoginFacebook.ShowModal(
       procedure(ModalResult: TModalResult)
       begin
@@ -276,12 +324,17 @@ begin
           OAuth2_Facebook.AccessToken := FAccessToken;
 
           RESTRequest.Execute;
+        end
+        else
+        begin
+          //ShowMessage('Login com Facebook cancelado ou falhou.');
         end;
       end);
   except
     on E: Exception do
       ShowMessage('Erro de comunicação: ' + E.Message);
   end;
+
 end;
 
 procedure TfrmLogin.btncontaClick(Sender: TObject);
@@ -300,4 +353,3 @@ begin
 end;
 
 end.
-
