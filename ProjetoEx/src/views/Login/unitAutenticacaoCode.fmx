@@ -1,0 +1,107 @@
+object AutenticacaoCode: TAutenticacaoCode
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 667
+  ClientWidth = 325
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object Layout6: TLayout
+    Align = Center
+    Size.Width = 293.000000000000000000
+    Size.Height = 396.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object rectEntrar: TRectangle
+      Align = Top
+      Fill.Color = xFF663DE8
+      Margins.Top = 20.000000000000000000
+      Position.Y = 158.000000000000000000
+      Size.Width = 293.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 4.000000000000000000
+      YRadius = 4.000000000000000000
+      object btnValidar: TSpeedButton
+        Align = Client
+        Cursor = crHandPoint
+        StyledSettings = [Family]
+        Size.Width = 293.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Validar'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = claWhite
+        TextSettings.Trimming = None
+        OnClick = btnValidarClick
+      end
+    end
+    object Label15: TLabel
+      Align = Top
+      StyledSettings = [Family, FontColor]
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 30.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 79.000000000000000000
+      Size.Width = 283.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      Text = 'Digite o codigo recebido'
+      TabOrder = 2
+    end
+    object edtcode: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Top
+      TabOrder = 3
+      TextSettings.Font.Size = 14.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 106.000000000000000000
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Size.Width = 273.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [Family, Style, FontColor]
+    end
+    object lblNewConta: TLabel
+      Align = Bottom
+      Cursor = crHandPoint
+      StyledSettings = []
+      HitTest = True
+      Margins.Bottom = 100.000000000000000000
+      Position.Y = 279.000000000000000000
+      Size.Width = 293.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.FontColor = xFF0236DA
+      TextSettings.HorzAlign = Center
+      Text = 'Reenviar codigo'
+      TabOrder = 0
+    end
+    object Label2: TLabel
+      Align = Top
+      StyledSettings = []
+      Margins.Top = 10.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 293.000000000000000000
+      Size.Height = 39.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = xFF1E1A19
+      TextSettings.HorzAlign = Center
+      Text = 'Codigo de autenticacao'
+      TabOrder = 1
+    end
+  end
+end

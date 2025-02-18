@@ -66,7 +66,6 @@ object frmLogin: TfrmLogin
             TextSettings.Font.StyleExt = {00060000000000000004000000}
             TextSettings.FontColor = claWhite
             TextSettings.Trimming = None
-            OnClick = btnAcessarFacebookClick
             object Image1: TImage
               MultiResBitmap.Width = 48
               MultiResBitmap = <
@@ -542,7 +541,6 @@ object frmLogin: TfrmLogin
           TextSettings.Font.Size = 16.000000000000000000
           TextSettings.Font.StyleExt = {00060000000000000004000000}
           TextSettings.Trimming = None
-          OnClick = btncontaClick
         end
       end
       object lblExit: TLabel
@@ -559,7 +557,6 @@ object frmLogin: TfrmLogin
         TextSettings.FontColor = xFF6C6867
         Text = 'X'
         TabOrder = 1
-        OnClick = lblExitClick
       end
     end
     object tabEntrarComEmail: TTabItem
@@ -927,49 +924,7 @@ object frmLogin: TfrmLogin
         TextSettings.FontColor = xFF6C6867
         Text = 'X'
         TabOrder = 1
-        OnClick = lblExit1Click
       end
     end
-  end
-  object RESTRequest: TRESTRequest
-    Client = RESTClient
-    Params = <>
-    Response = RESTResponse
-    OnAfterExecute = RESTRequestAfterExecute
-    SynchronizedEvents = False
-    Left = 16
-    Top = 24
-  end
-  object RESTClient: TRESTClient
-    Authenticator = OAuth2_google
-    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
-    AcceptCharset = 'UTF-8, *;q=0.8'
-    Params = <>
-    RaiseExceptionOn500 = False
-    SynchronizedEvents = False
-    Left = 96
-    Top = 16
-  end
-  object RESTResponse: TRESTResponse
-    ContentType = 'application/json'
-    Left = 184
-    Top = 32
-  end
-  object OAuth2_google: TOAuth2Authenticator
-    Left = 78
-    Top = 120
-  end
-  object OAuth2_Facebook: TOAuth2Authenticator
-    AuthorizationEndpoint = 'https://www.facebook.com/dialog/oauth'
-    RedirectionEndpoint = 'https://www.facebook.com/connect/login_success.html'
-    ResponseType = rtTOKEN
-    Scope = 'user_about_me,user_birthday'
-    Left = 198
-    Top = 120
-  end
-  object RESTResponseDataSetAdapter: TRESTResponseDataSetAdapter
-    FieldDefs = <>
-    Left = 72
-    Top = 200
   end
 end

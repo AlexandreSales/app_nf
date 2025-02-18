@@ -354,6 +354,12 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="ultils\utilsLoadig.pas"/>
+        <DCCReference Include="common\common.consts.pas"/>
+        <DCCReference Include="views\Login\unitAutenticacaoCode.pas">
+            <Form>AutenticacaoCode</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="ultils\codeGenarete.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -848,6 +854,18 @@
                 <DeployFile LocalName="Win32\Debug\AppEx.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>AppEx.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\AppEx.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AppEx.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\AppEx.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win64">
+                        <RemoteName>AppEx.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

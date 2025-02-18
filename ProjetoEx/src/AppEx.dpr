@@ -8,7 +8,10 @@ uses
   usuarioClass in 'model\usuarioClass.pas',
   loginFacebook in 'views\Login\loginFacebook.pas' {frmLoginFacebook},
   mainClientes in 'views\mainClientes\mainClientes.pas' {frmClientes},
-  utilsLoadig in 'ultils\utilsLoadig.pas';
+  utilsLoadig in 'ultils\utilsLoadig.pas',
+  common.consts in 'common\common.consts.pas',
+  unitAutenticacaoCode in 'views\Login\unitAutenticacaoCode.pas' {AutenticacaoCode},
+  codeGenarete in 'ultils\codeGenarete.pas';
 
 {$R *.res}
 
@@ -20,5 +23,6 @@ begin
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmLoginFacebook, frmLoginFacebook);
   Application.CreateForm(TfrmClientes, frmClientes);
+  Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
   Application.Run;
 end.

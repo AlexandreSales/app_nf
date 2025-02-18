@@ -8,7 +8,8 @@ uses
   RESTRequest4D,
   FireDAC.Comp.Client,
   System.JSON,
-  usuarioClass;
+  usuarioClass,
+  common.consts;
 
 type
   Tdm = class(TDataModule)
@@ -86,11 +87,10 @@ begin
 
 end;
 
-procedure Tdm.login(email, senha: string);
+procedure Tdm.Login(email, senha: string);
 var
   resp: IResponse;
   jsonRequest, jsonResponse: TJSONObject;
-  passwordValue: TJSONValue;
 begin
   jsonRequest := TJSONObject.Create;
   try
@@ -99,11 +99,10 @@ begin
 
     try
       resp := TRequest.New
-                      .BaseURL('http://localhost:3000')
-                      .Resource('/usuarios/login')
-                      .AddBody(jsonRequest.ToString)
-                      .Accept('application/json')
-                      .Post;
+              .BaseURL(baseURL + '/usuarios/login')
+              .AddBody(jsonRequest.ToString)
+              .Accept('application/json')
+              .Post;
 
       if resp.StatusCode = 200 then
       begin
@@ -111,15 +110,9 @@ begin
         try
           if Assigned(jsonResponse) then
           begin
-
-            if jsonResponse.TryGetValue('id', TJSONValue(passwordValue)) then
-              TSession.id := passwordValue.Value.ToInteger;
-
-            if jsonResponse.TryGetValue('email', TJSONValue(passwordValue)) then
-              TSession.EMAIL := passwordValue.Value;
-
-            if jsonResponse.TryGetValue('password', TJSONValue(passwordValue)) then
-              TSession.password := passwordValue.Value;
+            TSession.id := jsonResponse.GetValue<integer>('id', 0);
+            TSession.EMAIL := jsonResponse.GetValue<string>('email', '');
+            TSession.requires2FA := jsonResponse.GetValue<boolean>('requires_2fa', false);
           end;
         finally
           jsonResponse.Free;
@@ -127,7 +120,6 @@ begin
       end
       else
         raise Exception.Create('Erro no login: ' + resp.Content);
-
     except
       on E: Exception do
         raise Exception.Create('Erro de comunicação: ' + E.Message);

@@ -50,7 +50,6 @@ uses unitLogin;
 
 procedure TfrmLoginFacebook.lblExitClick(Sender: TObject);
 begin
-  frmLogin.FAccessToken := '';
   ModalResult := mrOk;
 end;
 
