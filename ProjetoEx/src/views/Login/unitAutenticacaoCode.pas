@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Forms,
   FMX.Dialogs, FMX.Edit, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Objects,
   FMX.Layouts, RESTRequest4D, System.JSON, dmUsuario, usuarioClass, common.consts,
-  codeGenarete;  // Importa a unidade de geração e envio do código
+  codeGenarete;
 
 type
   TAutenticacaoCode = class(TForm)
@@ -18,10 +18,11 @@ type
     lblNewConta: TLabel;
     Label2: TLabel;
     procedure btnValidarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject); // Evento de mostrar o formulário
+    procedure lblNewContaClick(Sender: TObject);
   private
     procedure ValidateCode;
     procedure EnviarCodigoAutenticacao;
+
   public
   end;
 
@@ -39,9 +40,8 @@ begin
   ValidateCode;
 end;
 
-procedure TAutenticacaoCode.FormShow(Sender: TObject);
+procedure TAutenticacaoCode.lblNewContaClick(Sender: TObject);
 begin
-  // Chama a função para gerar e enviar o código assim que o formulário for exibido
   EnviarCodigoAutenticacao;
 end;
 
@@ -65,9 +65,8 @@ begin
       if resp.StatusCode = 200 then
       begin
         ShowMessage('Código validado! Acesso liberado.');
-        Close;  // Fecha a tela de autenticação
+        Close;
 
-        // Abre o sistema principal
         if not Assigned(frmClientes) then
           Application.CreateForm(TfrmClientes, frmClientes);
         frmClientes.Show;
@@ -85,16 +84,33 @@ end;
 
 procedure TAutenticacaoCode.EnviarCodigoAutenticacao;
 var
-  Codigo: string;
-  Destinatario: string;
+  resp: IResponse;
+  jsonRequest, jsonResponse: TJSONObject;
 begin
-  Codigo := TCodeGenerator.GerarCodigo;
+  jsonRequest := TJSONObject.Create;
+  try
+    jsonRequest.AddPair('user_id', TJSONNumber.Create(TSession.id));
+    jsonRequest.AddPair('phone', '5561992045816');
 
-  Destinatario := '5561992045816';
+    try
+      resp := TRequest.New
+                      .BaseURL(baseURL)
+                      .Resource('/usuarios/enviarCodigo')
+                      .AddBody(jsonRequest.ToString)
+                      .Accept('application/json')
+                      .Post;
 
-  TCodeGenerator.EnviarCodigoSMS(Destinatario, Codigo);
-
-  ShowMessage('Código enviado para o número ' + Destinatario);
+      if resp.StatusCode = 200 then
+        ShowMessage('Acessando back com sucesso!')
+      else
+        ShowMessage('nao acessou o back: ' + resp.Content);
+    except
+      on E: Exception do
+        ShowMessage('Erro de comunicação: ' + E.Message);
+    end;
+  finally
+    jsonRequest.Free;
+  end;
 end;
 
 end.
