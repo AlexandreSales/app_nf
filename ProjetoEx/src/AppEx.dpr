@@ -10,8 +10,8 @@ uses
   mainClientes in 'views\mainClientes\mainClientes.pas' {frmClientes},
   utilsLoadig in 'ultils\utilsLoadig.pas',
   common.consts in 'common\common.consts.pas',
-  unitAutenticacaoCode in 'views\Login\unitAutenticacaoCode.pas' {AutenticacaoCode},
-  codeGenarete in 'ultils\codeGenarete.pas';
+  unitAutenticacaoCode in 'views\Login\unitAutenticacaoCode.pas' {AutenticacaoCode};
+
 
 {$R *.res}
 

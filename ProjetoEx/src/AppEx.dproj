@@ -359,7 +359,6 @@
             <Form>AutenticacaoCode</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="ultils\codeGenarete.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

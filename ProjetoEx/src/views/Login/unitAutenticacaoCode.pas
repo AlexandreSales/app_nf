@@ -5,8 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Forms,
   FMX.Dialogs, FMX.Edit, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Objects,
-  FMX.Layouts, RESTRequest4D, System.JSON, dmUsuario, usuarioClass, common.consts,
-  codeGenarete;
+  FMX.Layouts, RESTRequest4D, System.JSON, dmUsuario, usuarioClass, common.consts;
 
 type
   TAutenticacaoCode = class(TForm)
@@ -101,15 +100,17 @@ begin
                       .Post;
 
       if resp.StatusCode = 200 then
-        ShowMessage('Acessando back com sucesso!')
+        ShowMessage('Foi enviado com sucesso')
       else
-        ShowMessage('nao acessou o back: ' + resp.Content);
+        ShowMessage('O codigo nao foi enviado, verifique o backend ' + resp.Content);
     except
       on E: Exception do
         ShowMessage('Erro de comunicação: ' + E.Message);
     end;
   finally
-    jsonRequest.Free;
+    if jsonRequest <> nil then
+      freeandnil(jsonRequest);
+
   end;
 end;
 

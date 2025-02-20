@@ -3,15 +3,43 @@ unit unitLogin;
 interface
 
 uses
-  System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Forms, FMX.Dialogs,
-  FMX.Edit, FMX.Objects, FMX.StdCtrls, FMX.Layouts, FMX.TabControl, usuarioClass,
-  utilsLoadig, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.StorageBin, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FMX.Controls.Presentation, REST.Authenticator.OAuth.WebForm.FMX,
-  REST.Types, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  REST.Authenticator.OAuth, REST.Utils, loginFacebook, System.UITypes,
-  System.JSON, Web.HTTPApp, RESTRequest4D, REST.Response.Adapter;
+  System.SysUtils,
+  System.Classes,
+  FMX.Types,
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Dialogs,
+  FMX.Edit,
+  FMX.Objects,
+  FMX.StdCtrls,
+  FMX.Layouts,
+  FMX.TabControl,
+  usuarioClass,
+  utilsLoadig,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.StorageBin,
+  Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+  FMX.Controls.Presentation,
+  REST.Authenticator.OAuth.WebForm.FMX,
+  REST.Types, REST.Client,
+  Data.Bind.Components,
+  Data.Bind.ObjectScope,
+  REST.Authenticator.OAuth,
+  REST.Utils,
+  loginFacebook,
+  System.UITypes,
+  System.JSON,
+  Web.HTTPApp,
+  RESTRequest4D,
+  REST.Response.Adapter,
+  common.consts;
 
 type
   TfrmLogin = class(TForm)
@@ -78,28 +106,52 @@ begin
   TLoading.ExecuteThread(
     procedure
     begin
-      Sleep(800);  // Simula o tempo de processamento
+      Sleep(800);
       dm.Login(edtEmail.Text, edtSenha.Text);
     end,TerminateLoading
   );
 end;
 
-
-
 procedure TfrmLogin.TerminateLoading(Sender: TObject);
+var
+  resp: IResponse;
+  jsonRequest: TJSONObject;
 begin
   if TSession.id > 0 then
   begin
+    jsonRequest := TJSONObject.Create;
+    try
+      jsonRequest.AddPair('user_id', TJSONNumber.Create(TSession.id));
 
-      Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
-      AutenticacaoCode.Show;
+      resp := TRequest.New
+              .BaseURL(baseURL + '/usuarios/verificar-codigo-existente')
+              .AddBody(jsonRequest.ToString)
+              .Accept('application/json')
+              .Post;
 
+      if resp.StatusCode = 200 then
+      begin
+        if resp.Content.Contains('codigo_existe') then
+        begin
+          if not Assigned(frmClientes) then
+            Application.CreateForm(TfrmClientes, frmClientes);
+          frmClientes.Show;
+        end
+        else
+        begin
+          Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
+          AutenticacaoCode.Show;
+        end;
+      end
+      else
+        ShowMessage('Erro ao verificar código: ' + resp.Content);
+    finally
+      jsonRequest.Free;
+    end;
   end
   else
     ShowMessage('Erro no login. Verifique suas credenciais.');
 end;
-
-
 
 procedure TfrmLogin.TerminateCadastro(sender: TObject);
 begin
@@ -107,8 +159,6 @@ begin
 
   TabControl.GotoVisibleTab(0);
 end;
-
-
 
 procedure TfrmLogin.lblNovaContaClick(Sender: TObject);
 begin
