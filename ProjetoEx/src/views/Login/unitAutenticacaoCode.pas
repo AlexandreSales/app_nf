@@ -56,14 +56,16 @@ begin
 
     try
       resp := TRequest.New
-              .BaseURL(baseURL + '/usuarios/verificar-codigo')
+              .BaseURL(baseURL + '/usuarios/verificar-codigo-existente')
               .AddBody(jsonRequest.ToString)
               .Accept('application/json')
               .Post;
 
-      if resp.StatusCode = 200 then
+      jsonResponse := TJSONObject.ParseJSONValue(resp.Content) as TJSONObject;
+
+      if jsonResponse.GetValue<string>('status') = 'success' then
       begin
-        ShowMessage('Código validado! Acesso liberado.');
+        ShowMessage(jsonResponse.GetValue<string>('mensagem'));
         Close;
 
         if not Assigned(frmClientes) then
@@ -71,15 +73,20 @@ begin
         frmClientes.Show;
       end
       else
-        ShowMessage('Código inválido. Tente novamente.');
+      begin
+        ShowMessage(jsonResponse.GetValue<string>('mensagem'));
+      end;
     except
       on E: Exception do
         ShowMessage('Erro de comunicação: ' + E.Message);
     end;
   finally
     jsonRequest.Free;
+    if Assigned(jsonResponse) then
+      jsonResponse.Free;
   end;
 end;
+
 
 procedure TAutenticacaoCode.EnviarCodigoAutenticacao;
 var
