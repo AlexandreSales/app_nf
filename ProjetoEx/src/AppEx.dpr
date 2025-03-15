@@ -10,8 +10,8 @@ uses
   mainClientes in 'views\mainClientes\mainClientes.pas' {frmClientes},
   utilsLoadig in 'ultils\utilsLoadig.pas',
   common.consts in 'common\common.consts.pas',
-  unitAutenticacaoCode in 'views\Login\unitAutenticacaoCode.pas' {AutenticacaoCode};
-
+  unitAutenticacaoCode in 'views\Login\unitAutenticacaoCode.pas' {AutenticacaoCode},
+  UnitConfiguracoes in 'views\Config\UnitConfiguracoes.pas' {FrmConfiguracoes};
 
 {$R *.res}
 
@@ -24,5 +24,6 @@ begin
   Application.CreateForm(TfrmLoginFacebook, frmLoginFacebook);
   Application.CreateForm(TfrmClientes, frmClientes);
   Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
+  Application.CreateForm(TFrmConfiguracoes, FrmConfiguracoes);
   Application.Run;
 end.
