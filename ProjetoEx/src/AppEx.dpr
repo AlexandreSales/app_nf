@@ -11,7 +11,9 @@ uses
   utilsLoadig in 'ultils\utilsLoadig.pas',
   common.consts in 'common\common.consts.pas',
   unitAutenticacaoCode in 'views\Login\unitAutenticacaoCode.pas' {AutenticacaoCode},
-  UnitConfiguracoes in 'views\Config\UnitConfiguracoes.pas' {FrmConfiguracoes};
+  UnitConfiguracoes in 'views\Config\UnitConfiguracoes.pas' {FrmConfiguracoes},
+  DadosCadastraisClass in 'model\DadosCadastraisClass.pas',
+  dmMeiDados in 'model\dmMeiDados.pas' {DataModuleMei: TDataModule};
 
 {$R *.res}
 
@@ -25,5 +27,6 @@ begin
   Application.CreateForm(TfrmClientes, frmClientes);
   Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
   Application.CreateForm(TFrmConfiguracoes, FrmConfiguracoes);
+  Application.CreateForm(TDataModuleMei, DataModuleMei);
   Application.Run;
 end.

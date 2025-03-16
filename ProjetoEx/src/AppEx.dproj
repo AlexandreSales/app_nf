@@ -5,11 +5,10 @@
         <FrameworkType>FMX</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Android64</Platform>
         <TargetedPlatforms>693267</TargetedPlatforms>
         <AppType>Application</AppType>
         <MainSource>AppEx.dpr</MainSource>
-        <ProjectName Condition="'$(ProjectName)'==''">AppEx</ProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -362,6 +361,12 @@
         <DCCReference Include="views\Config\UnitConfiguracoes.pas">
             <Form>FrmConfiguracoes</Form>
             <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="model\DadosCadastraisClass.pas"/>
+        <DCCReference Include="model\dmMeiDados.pas">
+            <Form>DataModuleMei</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
@@ -863,12 +868,6 @@
                 <DeployFile LocalName="Win64\Debug\AppEx.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>AppEx.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Win64\Debug\AppEx.rsm" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win64">
-                        <RemoteName>AppEx.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

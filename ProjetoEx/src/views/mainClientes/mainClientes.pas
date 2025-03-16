@@ -38,6 +38,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure imgAba2Click(Sender: TObject);
     procedure imgAba3Click(Sender: TObject);
+    procedure rectItemConfigClick(Sender: TObject);
   private
     { Private declarations }
      procedure MudarAba(img: TImage);
@@ -86,6 +87,14 @@ begin
     TabControl.GotoVisibleTab(img.Tag);
 
 
+end;
+
+procedure TfrmClientes.rectItemConfigClick(Sender: TObject);
+begin
+  if NOT Assigned(FrmConfiguracoes) then
+    Application.CreateForm(TFrmConfiguracoes, FrmConfiguracoes);
+
+  FrmConfiguracoes.Show;
 end;
 
 end.

@@ -297,6 +297,7 @@ object frmClientes: TfrmClientes
         Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = xFFE2E2E2
+        OnClick = rectItemConfigClick
         object Image3: TImage
           MultiResBitmap.Height = 64
           MultiResBitmap.Width = 64

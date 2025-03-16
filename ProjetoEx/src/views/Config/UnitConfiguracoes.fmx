@@ -121,7 +121,6 @@ object FrmConfiguracoes: TFrmConfiguracoes
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Top
         TabOrder = 8
-        Password = True
         TextSettings.Font.Size = 14.000000000000000000
         Position.X = 10.000000000000000000
         Position.Y = 276.000000000000000000
@@ -162,6 +161,7 @@ object FrmConfiguracoes: TFrmConfiguracoes
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
         StyledSettings = [Family, Style, FontColor]
+        OnExit = edtCNPJExit
       end
       object Label2: TLabel
         Align = Top
@@ -228,7 +228,6 @@ object FrmConfiguracoes: TFrmConfiguracoes
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Top
         TabOrder = 4
-        Password = True
         TextSettings.Font.Size = 14.000000000000000000
         Position.X = 10.000000000000000000
         Position.Y = 187.000000000000000000
@@ -360,21 +359,6 @@ object FrmConfiguracoes: TFrmConfiguracoes
         Text = 'Cidade'
         TabOrder = 13
       end
-      object Cidade: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        Align = Top
-        TabOrder = 22
-        TextSettings.Font.Size = 14.000000000000000000
-        Position.X = 10.000000000000000000
-        Position.Y = 846.000000000000000000
-        Margins.Left = 10.000000000000000000
-        Margins.Top = 10.000000000000000000
-        Margins.Right = 10.000000000000000000
-        Size.Width = 348.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        StyledSettings = [Family, Style, FontColor]
-      end
       object Label10: TLabel
         Align = Top
         StyledSettings = [Family, FontColor]
@@ -434,6 +418,7 @@ object FrmConfiguracoes: TFrmConfiguracoes
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
         StyledSettings = [Family, Style, FontColor]
+        OnExit = edtCEPExit
       end
       object Label12: TLabel
         Align = Top
@@ -510,6 +495,21 @@ object FrmConfiguracoes: TFrmConfiguracoes
         Size.PlatformDefault = False
         StyledSettings = [Family, Style, FontColor]
       end
+      object edtCidade: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 22
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 846.000000000000000000
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Size.Width = 348.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+      end
     end
   end
   object Rectangle1: TRectangle
@@ -520,7 +520,7 @@ object FrmConfiguracoes: TFrmConfiguracoes
     Size.Height = 44.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = claWhite
-    object Image1: TImage
+    object btnSalvar: TImage
       MultiResBitmap.Height = 64
       MultiResBitmap.Width = 64
       MultiResBitmap = <
@@ -587,7 +587,7 @@ object FrmConfiguracoes: TFrmConfiguracoes
       Size.Width = 40.000000000000000000
       Size.Height = 43.000000000000000000
       Size.PlatformDefault = False
-      OnClick = imgSalvarClick
+      OnClick = btnSalvarClick
     end
   end
 end
