@@ -15,7 +15,7 @@ object frmLogin: TfrmLogin
     Size.Height = 790.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     TabPosition = None
     Sizes = (
@@ -30,7 +30,7 @@ object frmLogin: TfrmLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -401,6 +401,7 @@ object frmLogin: TfrmLogin
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
           TabOrder = 5
+          Password = True
           TextSettings.Font.Size = 14.000000000000000000
           Position.X = 10.000000000000000000
           Position.Y = 351.000000000000000000
@@ -467,21 +468,6 @@ object frmLogin: TfrmLogin
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
         end
-        object edtEmailcad: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 4
-          TextSettings.Font.Size = 14.000000000000000000
-          Position.X = 10.000000000000000000
-          Position.Y = 262.000000000000000000
-          Margins.Left = 10.000000000000000000
-          Margins.Top = 10.000000000000000000
-          Margins.Right = 10.000000000000000000
-          Size.Width = 273.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          StyledSettings = [Family, Style, FontColor]
-        end
         object Label3: TLabel
           Align = Top
           StyledSettings = [Family, FontColor]
@@ -513,6 +499,21 @@ object frmLogin: TfrmLogin
             'Ao se inscrever, voc'#234' concorda com os Termos de Servi'#231'os e a Pol' +
             #237'tica de Privacidade.'
           TabOrder = 0
+        end
+        object edtEmailCadastro: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 4
+          TextSettings.Font.Size = 14.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 262.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Size.Width = 273.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
         end
       end
       object Rectangle2: TRectangle
@@ -557,6 +558,7 @@ object frmLogin: TfrmLogin
         TextSettings.FontColor = xFF6C6867
         Text = 'X'
         TabOrder = 1
+        OnClick = lblExitClick
       end
     end
     object tabEntrarComEmail: TTabItem
@@ -565,7 +567,7 @@ object frmLogin: TfrmLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False

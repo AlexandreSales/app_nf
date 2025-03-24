@@ -79,12 +79,14 @@ type
     lblNewConta: TLabel;
     lblExit1: TLabel;
     lblExit: TLabel;
+    edtEmailCadastro: TEdit;
 
     procedure btnEntrarClick(Sender: TObject);
     procedure lblNovaContaClick(Sender: TObject);
     procedure lblNewContaClick(Sender: TObject);
     procedure btnCriarContaClick(Sender: TObject);
     procedure btnAcessarEmailClick(Sender: TObject);
+    procedure lblExitClick(Sender: TObject);
   private
     procedure TerminateLoading(sender: TObject);
     procedure TerminateCadastro(sender: TObject);
@@ -165,6 +167,11 @@ begin
   TabControl.GotoVisibleTab(1);
 end;
 
+procedure TfrmLogin.lblExitClick(Sender: TObject);
+begin
+  TabControl.GotoVisibleTab(0);
+end;
+
 procedure TfrmLogin.lblNewContaClick(Sender: TObject);
 begin
   TabControl.GotoVisibleTab(1);
@@ -176,7 +183,7 @@ begin
     procedure
     begin
       Sleep(800);
-      dm.cadastrarUsuario(edtNome.Text, edtUltimoNome.Text, edtEmail.Text, edtSenhaCad.Text);
+      dm.cadastrarUsuario(edtNome.Text, edtUltimoNome.Text, edtEmailCadastro.Text, edtSenhaCad.Text);
     end,
     TerminateCadastro
   );
