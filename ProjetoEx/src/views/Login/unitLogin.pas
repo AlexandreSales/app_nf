@@ -46,10 +46,7 @@ type
     TabControl: TTabControl;
     tabLogin: TTabItem;
     Layout2: TLayout;
-    rectFaceBook: TRectangle;
-    btnAcessarFacebook: TSpeedButton;
     lblCriarConta: TLabel;
-    Layout1: TLayout;
     tabNovaConta: TTabItem;
     Layout4: TLayout;
     Label8: TLabel;
@@ -69,17 +66,16 @@ type
     btnEntrar: TSpeedButton;
     Label15: TLabel;
     edtEmail: TEdit;
-    rectGoogle: TRectangle;
-    btnAcessarGoogle: TSpeedButton;
-    Image1: TImage;
-    Image4: TImage;
     rectEmail: TRectangle;
     btnAcessarEmail: TSpeedButton;
     lblNovaConta: TLabel;
     lblNewConta: TLabel;
-    lblExit1: TLabel;
-    lblExit: TLabel;
     edtEmailCadastro: TEdit;
+    Rectangle1: TRectangle;
+    SpeedButton1: TSpeedButton;
+    Layout1: TLayout;
+    Image1: TImage;
+    Label1: TLabel;
 
     procedure btnEntrarClick(Sender: TObject);
     procedure lblNovaContaClick(Sender: TObject);
@@ -87,6 +83,8 @@ type
     procedure btnCriarContaClick(Sender: TObject);
     procedure btnAcessarEmailClick(Sender: TObject);
     procedure lblExitClick(Sender: TObject);
+    procedure lblExit1Click(Sender: TObject);
+    procedure btnVoltarClick(Sender: TObject);
   private
     procedure TerminateLoading(sender: TObject);
     procedure TerminateCadastro(sender: TObject);
@@ -108,16 +106,36 @@ begin
   TLoading.ExecuteThread(
     procedure
     begin
-      Sleep(800);
-      dm.Login(edtEmail.Text, edtSenha.Text);
-    end,TerminateLoading
+      try
+        Sleep(800);
+        dm.Login(edtEmail.Text, edtSenha.Text);
+      except
+        on E: Exception do
+        begin
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              ShowMessage('Erro ao realizar login: ' + E.Message);
+            end
+          );
+        end;
+      end;
+    end,
+    TerminateLoading
   );
+end;
+
+procedure TfrmLogin.btnVoltarClick(Sender: TObject);
+begin
+   TabControl.GotoVisibleTab(0);
 end;
 
 procedure TfrmLogin.TerminateLoading(Sender: TObject);
 var
   resp: IResponse;
   jsonRequest: TJSONObject;
+  jsonResp: TJSONObject;
+  codigoSalvo: string;
 begin
   if TSession.id > 0 then
   begin
@@ -133,16 +151,23 @@ begin
 
       if resp.StatusCode = 200 then
       begin
-        if resp.Content.Contains('codigo_existe') then
-        begin
-          if not Assigned(frmClientes) then
-            Application.CreateForm(TfrmClientes, frmClientes);
-          frmClientes.Show;
-        end
-        else
-        begin
-          Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
-          AutenticacaoCode.Show;
+        jsonResp := TJSONObject.ParseJSONValue(resp.Content) as TJSONObject;
+        try
+          if jsonResp.GetValue<Boolean>('codigo_existe', False) then
+          begin
+            codigoSalvo := jsonResp.GetValue<string>('codigo_salvo', '');
+
+            if not Assigned(frmClientes) then
+              Application.CreateForm(TfrmClientes, frmClientes);
+            frmClientes.Show;
+          end
+          else
+          begin
+            Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
+            AutenticacaoCode.Show;
+          end;
+        finally
+          jsonResp.Free;
         end;
       end
       else
@@ -167,6 +192,11 @@ begin
   TabControl.GotoVisibleTab(1);
 end;
 
+procedure TfrmLogin.lblExit1Click(Sender: TObject);
+begin
+ TabControl.GotoVisibleTab(0);
+end;
+
 procedure TfrmLogin.lblExitClick(Sender: TObject);
 begin
   TabControl.GotoVisibleTab(0);
@@ -182,8 +212,20 @@ begin
   TLoading.ExecuteThread(
     procedure
     begin
-      Sleep(800);
-      dm.cadastrarUsuario(edtNome.Text, edtUltimoNome.Text, edtEmailCadastro.Text, edtSenhaCad.Text);
+      try
+        Sleep(800);
+        dm.cadastrarUsuario(edtNome.Text, edtUltimoNome.Text, edtEmailCadastro.Text, edtSenhaCad.Text);
+      except
+        on E: Exception do
+        begin
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              ShowMessage('Erro ao cadastrar usuário: ' + E.Message);
+            end
+          );
+        end;
+      end;
     end,
     TerminateCadastro
   );

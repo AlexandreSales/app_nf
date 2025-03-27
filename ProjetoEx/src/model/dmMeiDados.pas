@@ -13,6 +13,7 @@ type
     function BuscarDadosCNPJ(const ACNPJ: string): TJSONObject;
     function BuscarDadosCEP(const ACEP: string): TJSONObject;
     function SalvarDadosNoBanco(Dados: TJSONObject): Boolean;
+    function BuscarDadosMeiSalvos(const UsuarioID: Integer): TJSONObject;
   end;
 
 var
@@ -80,6 +81,30 @@ begin
       Result := False;
   end;
 end;
+
+function TDataModuleMei.BuscarDadosMeiSalvos(const UsuarioID: Integer): TJSONObject;
+var
+  Response: IResponse;
+begin
+  Result := nil;
+  try
+    Response := TRequest.New
+      .BaseURL(baseURL + '/mei/' + UsuarioID.ToString)
+      .Accept('application/json')
+      .Get;
+
+    if Response.StatusCode = 200 then
+    begin
+      var JsonArray := TJSONArray.ParseJSONValue(Response.Content) as TJSONArray;
+      if (JsonArray <> nil) and (JsonArray.Count > 0) then
+        Result := JsonArray.Items[0] as TJSONObject;
+    end;
+  except
+    on E: Exception do
+      Result := nil;
+  end;
+end;
+
 
 end.
 
