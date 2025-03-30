@@ -13,7 +13,8 @@ uses
   unitAutenticacaoCode in 'views\Login\unitAutenticacaoCode.pas' {AutenticacaoCode},
   UnitConfiguracoes in 'views\Config\UnitConfiguracoes.pas' {FrmConfiguracoes},
   DadosCadastraisClass in 'model\DadosCadastraisClass.pas',
-  dmMeiDados in 'model\dmMeiDados.pas' {DataModuleMei: TDataModule};
+  dmMeiDados in 'model\dmMeiDados.pas' {DataModuleMei: TDataModule},
+  uPermission in 'ultils\uPermission.pas';
 
 {$R *.res}
 
@@ -22,11 +23,5 @@ begin
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(Tdm, dm);
-  Application.CreateForm(TfrmLoginFacebook, frmLoginFacebook);
-  Application.CreateForm(TfrmClientes, frmClientes);
-  Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
-  Application.CreateForm(TFrmConfiguracoes, FrmConfiguracoes);
-  Application.CreateForm(TDataModuleMei, DataModuleMei);
   Application.Run;
 end.

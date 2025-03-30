@@ -20,6 +20,7 @@ type
     FEstado: string;
     FEmail: string;
     FTelefone: string;
+    FFoto: string; // <- Campo adicionado
   public
     property CNPJ: string read FCNPJ write FCNPJ;
     property RazaoSocial: string read FRazaoSocial write FRazaoSocial;
@@ -33,10 +34,10 @@ type
     property Estado: string read FEstado write FEstado;
     property Email: string read FEmail write FEmail;
     property Telefone: string read FTelefone write FTelefone;
-
+    property Foto: string read FFoto write FFoto; // <- Nova propriedade
 
     constructor Create; overload;
-    constructor Create(const ACNPJ, ARazaoSocial, ANomeFantasia, AInscricaoMunicipal, ACEP, ARua, ANumero, ABairro, ACidade, AEstado, AEmail, ATelefone: string); overload;
+    constructor Create(const ACNPJ, ARazaoSocial, ANomeFantasia, AInscricaoMunicipal, ACEP, ARua, ANumero, ABairro, ACidade, AEstado, AEmail, ATelefone, AFoto: string); overload;
   end;
 
 implementation
@@ -48,8 +49,7 @@ begin
   inherited Create;
 end;
 
-// Construtor com parâmetros
-constructor TDadosCadastrais.Create(const ACNPJ, ARazaoSocial, ANomeFantasia, AInscricaoMunicipal, ACEP, ARua, ANumero, ABairro, ACidade, AEstado, AEmail, ATelefone: string);
+constructor TDadosCadastrais.Create(const ACNPJ, ARazaoSocial, ANomeFantasia, AInscricaoMunicipal, ACEP, ARua, ANumero, ABairro, ACidade, AEstado, AEmail, ATelefone, AFoto: string);
 begin
   inherited Create;
   FCNPJ := ACNPJ;
@@ -64,6 +64,7 @@ begin
   FEstado := AEstado;
   FEmail := AEmail;
   FTelefone := ATelefone;
+  FFoto := AFoto; // <- Atribui a foto
 end;
 
 end.

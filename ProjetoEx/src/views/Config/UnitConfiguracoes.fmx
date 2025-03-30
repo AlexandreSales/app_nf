@@ -914,4 +914,27 @@ object FrmConfiguracoes: TFrmConfiguracoes
       OnClick = btnSalvarClick
     end
   end
+  object ActionList1: TActionList
+    Left = 48
+    Top = 19
+    object ActLogin: TChangeTabAction
+      Category = 'Tab'
+    end
+    object ActConta: TChangeTabAction
+      Category = 'Tab'
+    end
+    object ActFoto: TChangeTabAction
+      Category = 'Tab'
+    end
+    object ActLibrary: TTakePhotoFromLibraryAction
+      Category = 'Media Library'
+      MaxHeight = 256
+      MaxWidth = 256
+    end
+    object ActCamera: TTakePhotoFromCameraAction
+      Category = 'Media Library'
+      MaxHeight = 256
+      MaxWidth = 256
+    end
+  end
 end

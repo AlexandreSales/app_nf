@@ -7,9 +7,11 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit,
   FMX.Layouts, DadosCadastraisClass, System.JSON, dmMeiDados, usuarioClass,
-  FMX.ExtCtrls, System.IOUtils, FMX.Media, FMX.DialogService.Async,common.consts, RESTRequest4D,
-  FMX.MediaLibrary, FMX.Platform, System.Threading, System.Permissions
-  {$IFDEF ANDROID}, Androidapi.Helpers, Androidapi.JNI.Os, Androidapi.JNI.JavaTypes {$ENDIF};
+  FMX.ExtCtrls,System.NetEncoding, System.IOUtils, FMX.Media, FMX.DialogService.Async, common.consts, RESTRequest4D,
+  FMX.MediaLibrary, FMX.Platform, System.Threading, uPermission, FMX.MediaLibrary.Actions,
+  System.Permissions, FMX.StdActns, System.Actions, FMX.ActnList, FMX.TabControl
+  {$IFDEF ANDROID}, Androidapi.Helpers, Androidapi.JNI.Os, Androidapi.JNI.JavaTypes,
+  FMX.StdActns, System.Actions, FMX.ActnList, FMX.TabControl {$ENDIF};
 
 type
   TFrmConfiguracoes = class(TForm)
@@ -51,6 +53,12 @@ type
     layImgfilho: TLayout;
     imgUser: TImage;
     lblTextImg: TLabel;
+    ActionList1: TActionList;
+    ActLogin: TChangeTabAction;
+    ActConta: TChangeTabAction;
+    ActFoto: TChangeTabAction;
+    ActLibrary: TTakePhotoFromLibraryAction;
+    ActCamera: TTakePhotoFromCameraAction;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure imgFecharClick(Sender: TObject);
@@ -70,10 +78,17 @@ type
     procedure FormShow(Sender: TObject);
   private
     FOriginalHeight: Single;
+    permissao: TPermissions;
+    procedure ActLibraryDidFinishTaking(Image: TBitmap);
     procedure PreencherDadosCNPJ(Dados: TJSONObject);
     procedure PreencherDadosCEP(Dados: TJSONObject);
     procedure AjustarLayoutTeclado(TecladoAtivo: Boolean);
     procedure CarregarDadosExistentes;
+    procedure ErroPermissao(Sender: TObject);
+
+
+    function BitmapToBase64(Bitmap: TBitmap): string;
+
   public
   end;
 
@@ -89,16 +104,19 @@ uses FMX.DialogService;
 procedure TFrmConfiguracoes.FormCreate(Sender: TObject);
 begin
   FOriginalHeight := layDados.Height;
+  permissao := TPermissions.Create;
 
+  ActLibrary.OnDidFinishTaking := ActLibraryDidFinishTaking;
 end;
 
 procedure TFrmConfiguracoes.FormShow(Sender: TObject);
 begin
-   CarregarDadosExistentes;
+  CarregarDadosExistentes;
 end;
 
 procedure TFrmConfiguracoes.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  permissao.DisposeOf;
   Action := TCloseAction.caFree;
   FrmConfiguracoes := nil;
 end;
@@ -110,7 +128,8 @@ end;
 
 procedure TFrmConfiguracoes.imgUserClick(Sender: TObject);
 begin
-  // Implementar se desejar selecionar imagem
+  permissao.SolicitarGaleria(ActLibrary, ErroPermissao);
+  lblTextImg.Visible:= false;
 end;
 
 procedure TFrmConfiguracoes.layImgfilhoClick(Sender: TObject);
@@ -121,6 +140,32 @@ end;
 procedure TFrmConfiguracoes.lblTextImgClick(Sender: TObject);
 begin
   imgUserClick(Sender);
+end;
+
+procedure LoadBase64ImageToImageControl(const Base64: string; ImageControl: TImage);
+var
+  Bytes: TBytes;
+  Stream: TMemoryStream;
+begin
+  if Base64.Trim = '' then Exit;
+
+  Bytes := TNetEncoding.Base64.DecodeStringToBytes(Base64);
+  Stream := TMemoryStream.Create;
+  try
+    Stream.WriteData(Bytes, Length(Bytes));
+    Stream.Position := 0;
+    ImageControl.Bitmap.LoadFromStream(Stream);
+  finally
+    Stream.Free;
+  end;
+end;
+
+
+
+procedure TFrmConfiguracoes.ActLibraryDidFinishTaking(Image: TBitmap);
+begin
+  if Assigned(Image) then
+    imgUser.Bitmap.Assign(Image);
 end;
 
 procedure TFrmConfiguracoes.edtCNPJKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
@@ -219,6 +264,11 @@ begin
   EditGenericExit(Sender);
 end;
 
+procedure TFrmConfiguracoes.ErroPermissao(Sender: TObject);
+begin
+  showmessage('Você não possui permissão para esse recurso');
+end;
+
 procedure TFrmConfiguracoes.AjustarLayoutTeclado(TecladoAtivo: Boolean);
 begin
   if TecladoAtivo then
@@ -226,6 +276,42 @@ begin
   else
     layDados.Height := FOriginalHeight;
 end;
+
+function TFrmConfiguracoes.BitmapToBase64(Bitmap: TBitmap): string;
+var
+  Stream: TMemoryStream;
+  Bytes: TBytes;
+begin
+  Stream := TMemoryStream.Create;
+  try
+    Bitmap.SaveToStream(Stream);
+    Stream.Position := 0;
+    SetLength(Bytes, Stream.Size);
+    Stream.ReadBuffer(Bytes, Length(Bytes));
+    Result := TNetEncoding.Base64.EncodeBytesToString(Bytes);
+  finally
+    Stream.Free;
+  end;
+end;
+
+
+function BitmapToBase64(Bitmap: TBitmap): string;
+var
+  Stream: TMemoryStream;
+  Bytes: TBytes;
+begin
+  Stream := TMemoryStream.Create;
+  try
+    Bitmap.SaveToStream(Stream);
+    Stream.Position := 0;
+    SetLength(Bytes, Stream.Size);
+    Stream.ReadBuffer(Bytes, Length(Bytes));
+    Result := TNetEncoding.Base64.EncodeBytesToString(Bytes);
+  finally
+    Stream.Free;
+  end;
+end;
+
 
 procedure TFrmConfiguracoes.PreencherDadosCNPJ(Dados: TJSONObject);
 begin
@@ -246,6 +332,7 @@ end;
 procedure TFrmConfiguracoes.CarregarDadosExistentes;
 var
   Json: TJSONObject;
+  FotoBase64: string;
 begin
   Json := DataModuleMei.BuscarDadosMeiSalvos(TSession.id);
 
@@ -262,6 +349,13 @@ begin
     edtCidade.Text := Json.GetValue<string>('endereco_cidade', '');
     edtEstado.Text := Json.GetValue<string>('endereco_estado', '');
     edtCEP.Text := Json.GetValue<string>('endereco_cep', '');
+
+    // Carregar imagem
+    FotoBase64 := Json.GetValue<string>('foto', '');
+    LoadBase64ImageToImageControl(FotoBase64, imgUser);
+
+    // Ocultar texto da imagem, se houver imagem carregada
+    lblTextImg.Visible := imgUser.Bitmap.IsEmpty;
   end;
 end;
 
@@ -284,6 +378,11 @@ begin
     Dados.AddPair('estado', edtEstado.Text);
     Dados.AddPair('email', edtEmail.Text);
     Dados.AddPair('telefone', edtTelefone.Text);
+
+    if imgUser.Bitmap.IsEmpty then
+      Dados.AddPair('foto', '')
+    else
+      Dados.AddPair('foto', BitmapToBase64(imgUser.Bitmap));
 
     if DataModuleMei.SalvarDadosNoBanco(Dados) then
     begin
