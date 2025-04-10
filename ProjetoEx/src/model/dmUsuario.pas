@@ -19,6 +19,7 @@ type
     { Public declarations }
     procedure login(email, senha: string);
     procedure cadastrarUsuario(primeiroNome, ultimoNome,email,senha:string);
+    function ValidarSessao: Boolean;
   end;
 
 var
@@ -123,6 +124,45 @@ begin
     except
       on E: Exception do
         raise Exception.Create('Erro de comunicação: ' + E.Message);
+    end;
+  finally
+    jsonRequest.Free;
+  end;
+end;
+
+function Tdm.ValidarSessao: Boolean;
+var
+  resp: IResponse;
+  jsonRequest, jsonResponse: TJSONObject;
+begin
+  Result := False;
+
+  if TSession.id <= 0 then
+    Exit;
+
+  jsonRequest := TJSONObject.Create;
+  try
+    jsonRequest.AddPair('user_id', TJSONNumber.Create(TSession.id));
+
+    try
+      resp := TRequest.New
+        .BaseURL(baseURL + '/usuarios/validar-sessao') // <- ROTA CORRETA
+        .AddBody(jsonRequest.ToString)
+        .Accept('application/json')
+        .Post;
+
+      if resp.StatusCode = 200 then
+      begin
+        jsonResponse := TJSONObject.ParseJSONValue(resp.Content) as TJSONObject;
+        try
+          Result := jsonResponse.GetValue<Boolean>('sessao_valida', False); // <- precisa dessa chave no backend
+        finally
+          jsonResponse.Free;
+        end;
+      end;
+    except
+      on E: Exception do
+        Result := False;
     end;
   finally
     jsonRequest.Free;

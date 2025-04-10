@@ -8,6 +8,7 @@ object frmLogin: TfrmLogin
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   DesignerMasterStyle = 3
   object TabControl: TTabControl
     Align = Client
@@ -15,7 +16,7 @@ object frmLogin: TfrmLogin
     Size.Height = 790.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     TabPosition = None
     Sizes = (
@@ -30,7 +31,7 @@ object frmLogin: TfrmLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -84,7 +85,7 @@ object frmLogin: TfrmLogin
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = xFF0236DA
           TextSettings.HorzAlign = Center
-          Text = 'J'#225' tem uma conta?'
+          Text = 'Criar conta'
           TabOrder = 0
           OnClick = lblNovaContaClick
         end
@@ -2471,7 +2472,7 @@ object frmLogin: TfrmLogin
           TextSettings.FontColor = xFF1E1A19
           TextSettings.HorzAlign = Center
           Text = 'Criar uma conta'
-          TabOrder = 1
+          TabOrder = 2
         end
         object Label9: TLabel
           Align = Top
@@ -2486,12 +2487,12 @@ object frmLogin: TfrmLogin
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.Font.StyleExt = {00060000000000000004000000}
           Text = 'Nome'
-          TabOrder = 8
+          TabOrder = 9
         end
         object edtNome: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
-          TabOrder = 9
+          TabOrder = 10
           TextSettings.Font.Size = 14.000000000000000000
           Position.X = 10.000000000000000000
           Position.Y = 84.000000000000000000
@@ -2516,12 +2517,12 @@ object frmLogin: TfrmLogin
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.Font.StyleExt = {00060000000000000004000000}
           Text = 'Senha'
-          TabOrder = 3
+          TabOrder = 4
         end
         object edtSenhaCad: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
-          TabOrder = 5
+          TabOrder = 6
           Password = True
           TextSettings.Font.Size = 14.000000000000000000
           Position.X = 10.000000000000000000
@@ -2572,12 +2573,12 @@ object frmLogin: TfrmLogin
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.Font.StyleExt = {00060000000000000004000000}
           Text = #218'ltimo nome'
-          TabOrder = 6
+          TabOrder = 7
         end
         object edtUltimoNome: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
-          TabOrder = 7
+          TabOrder = 8
           TextSettings.Font.Size = 14.000000000000000000
           Position.X = 10.000000000000000000
           Position.Y = 173.000000000000000000
@@ -2602,7 +2603,7 @@ object frmLogin: TfrmLogin
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.Font.StyleExt = {00060000000000000004000000}
           Text = 'E-mail'
-          TabOrder = 2
+          TabOrder = 3
         end
         object Label4: TLabel
           Align = Bottom
@@ -2624,7 +2625,7 @@ object frmLogin: TfrmLogin
         object edtEmailCadastro: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
-          TabOrder = 4
+          TabOrder = 5
           TextSettings.Font.Size = 14.000000000000000000
           Position.X = 10.000000000000000000
           Position.Y = 262.000000000000000000
@@ -2635,6 +2636,23 @@ object frmLogin: TfrmLogin
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
+        end
+        object lblTextUserCadastro: TLabel
+          Align = Top
+          Cursor = crHandPoint
+          StyledSettings = []
+          HitTest = True
+          Margins.Top = 110.000000000000000000
+          Position.Y = 493.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF0236DA
+          TextSettings.HorzAlign = Center
+          Text = '.......'
+          Visible = False
+          TabOrder = 1
         end
       end
       object Rectangle2: TRectangle
@@ -2673,7 +2691,7 @@ object frmLogin: TfrmLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -2701,12 +2719,12 @@ object frmLogin: TfrmLogin
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.Font.StyleExt = {00060000000000000004000000}
           Text = 'Senha'
-          TabOrder = 2
+          TabOrder = 3
         end
         object edtSenha: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
-          TabOrder = 3
+          TabOrder = 4
           Password = True
           TextSettings.Font.Size = 14.000000000000000000
           Position.X = 10.000000000000000000
@@ -2758,12 +2776,12 @@ object frmLogin: TfrmLogin
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.Font.StyleExt = {00060000000000000004000000}
           Text = 'E-mail'
-          TabOrder = 4
+          TabOrder = 5
         end
         object edtEmail: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
-          TabOrder = 5
+          TabOrder = 6
           TextSettings.Font.Size = 14.000000000000000000
           Position.X = 10.000000000000000000
           Position.Y = 84.000000000000000000
@@ -2775,22 +2793,22 @@ object frmLogin: TfrmLogin
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
         end
-        object lblNewConta: TLabel
-          Align = Bottom
+        object lbTextUser: TLabel
+          Align = Top
           Cursor = crHandPoint
           StyledSettings = []
           HitTest = True
-          Margins.Bottom = 100.000000000000000000
-          Position.Y = 279.000000000000000000
+          Margins.Top = -50.000000000000000000
+          Position.Y = 365.000000000000000000
           Size.Width = 293.000000000000000000
           Size.Height = 17.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = xFF0236DA
           TextSettings.HorzAlign = Center
-          Text = 'Precisa de uma conta?'
-          TabOrder = 0
-          OnClick = lblNewContaClick
+          Text = '.......'
+          Visible = False
+          TabOrder = 1
         end
         object Label2: TLabel
           Align = Top
@@ -2805,7 +2823,24 @@ object frmLogin: TfrmLogin
           TextSettings.FontColor = xFF1E1A19
           TextSettings.HorzAlign = Center
           Text = 'Entrar com o e-mail'
-          TabOrder = 1
+          TabOrder = 2
+        end
+        object Label5: TLabel
+          Align = Top
+          Cursor = crHandPoint
+          StyledSettings = []
+          HitTest = True
+          Margins.Bottom = 100.000000000000000000
+          Position.Y = 275.000000000000000000
+          Size.Width = 293.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF0236DA
+          TextSettings.HorzAlign = Center
+          Text = 'Precisa de uma conta?'
+          TabOrder = 0
+          OnClick = lbTextUserClick
         end
       end
       object Rectangle1: TRectangle
@@ -2838,5 +2873,16 @@ object frmLogin: TfrmLogin
         end
       end
     end
+  end
+  object BiometricAuth: TBiometricAuth
+    AllowedAttempts = 0
+    BiometricStrengths = [DeviceCredential]
+    PromptCancelButtonText = 'Cancelar'
+    PromptConfirmationRequired = False
+    PromptDescription = 'Voc'#234' precisa de autentica'#231#227'o'
+    PromptSubtitle = 'Para acessar, voc'#234' precisa se autenticar'
+    PromptTitle = 'Autentica'#231#227'o'
+    Left = 64
+    Top = 48
   end
 end

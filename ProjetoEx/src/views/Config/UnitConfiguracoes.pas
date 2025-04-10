@@ -7,11 +7,12 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit,
   FMX.Layouts, DadosCadastraisClass, System.JSON, dmMeiDados, usuarioClass,
-  FMX.ExtCtrls,System.NetEncoding, System.IOUtils, FMX.Media, FMX.DialogService.Async, common.consts, RESTRequest4D,
-  FMX.MediaLibrary, FMX.Platform, System.Threading, uPermission, FMX.MediaLibrary.Actions,
-  System.Permissions, FMX.StdActns, System.Actions, FMX.ActnList, FMX.TabControl
-  {$IFDEF ANDROID}, Androidapi.Helpers, Androidapi.JNI.Os, Androidapi.JNI.JavaTypes,
-  FMX.StdActns, System.Actions, FMX.ActnList, FMX.TabControl {$ENDIF};
+  FMX.ExtCtrls, System.NetEncoding, System.IOUtils, FMX.Media, FMX.DialogService.Async,
+  common.consts, RESTRequest4D, FMX.MediaLibrary, FMX.Platform, System.Threading,
+  uPermission, FMX.MediaLibrary.Actions, System.Permissions,
+  FMX.StdActns, System.Actions, FMX.ActnList, FMX.TabControl
+  {$IFDEF ANDROID}, Androidapi.Helpers, Androidapi.JNI.Os, Androidapi.JNI.JavaTypes {$ENDIF};
+
 
 type
   TFrmConfiguracoes = class(TForm)
