@@ -1,4 +1,4 @@
-unit dmUsuario;
+Ôªøunit dmUsuario;
 
 interface
 
@@ -35,58 +35,55 @@ procedure Tdm.cadastrarUsuario(primeiroNome, ultimoNome, email, senha: string);
 var
   resp: IResponse;
   jsonRequest, jsonResponse: TJSONObject;
-  passwordValue: TJSONValue;
+  jsonValue: TJSONValue;
 begin
-    jsonRequest := TJSONObject.Create;
+  jsonRequest := TJSONObject.Create;
 
+  try
     try
-      try
-        jsonRequest.AddPair('first_name', primeiroNome);
-        jsonRequest.AddPair('last_name', ultimoNome);
-        jsonRequest.AddPair('email', email);
-        jsonRequest.AddPair('password', senha);
+      jsonRequest.AddPair('first_name', primeiroNome);
+      jsonRequest.AddPair('last_name', ultimoNome);
+      jsonRequest.AddPair('email', LowerCase(Trim(email)));
+      jsonRequest.AddPair('password', senha);
 
-         resp := TRequest.New
-                      .BaseURL('http://localhost:3000')
-                      .Resource('/usuarios/register')
-                      .AddBody(jsonRequest.ToString)
-                      .Accept('application/json')
-                      .Post;
+      resp := TRequest.New
+        .BaseURL(baseURL)
+        .Resource('/usuarios/register')
+        .AddBody(jsonRequest.ToString)
+        .Accept('application/json')
+        .Post;
 
-          if resp.StatusCode = 200 then
+      if resp.StatusCode = 200 then
+      begin
+        jsonResponse := TJSONObject.ParseJSONValue(resp.Content) as TJSONObject;
+        try
+          if Assigned(jsonResponse) then
           begin
-            jsonResponse := TJSONObject.ParseJSONValue(resp.Content) as TJSONObject;
-            try
-            if Assigned(jsonResponse) then
-            begin
+            if jsonResponse.TryGetValue('first_name', TJSONValue(jsonValue)) then
+              TSession.name := jsonValue.Value;
 
-                TSession.name := passwordValue.Value;
+            if jsonResponse.TryGetValue('last_name', TJSONValue(jsonValue)) then
+              TSession.lastName := jsonValue.Value;
 
-                TSession.lastName := passwordValue.Value;
-
-              if jsonResponse.TryGetValue('email', TJSONValue(passwordValue)) then
-                TSession.EMAIL := passwordValue.Value;
-
-              if jsonResponse.TryGetValue('password', TJSONValue(passwordValue)) then
-                TSession.password := passwordValue.Value;
-            end;
-          finally
-          jsonResponse.Free;
+            if jsonResponse.TryGetValue('email', TJSONValue(jsonValue)) then
+              TSession.email := jsonValue.Value;
           end;
-        end
+        finally
+          jsonResponse.Free;
+        end;
+      end
       else
-        raise Exception.Create('Erro no cadastro do usu·ro : ' + resp.Content);
+        raise Exception.Create('Erro no cadastro do usu√°rio: ' + resp.Content);
 
-       except
+    except
       on E: Exception do
-        raise Exception.Create('Erro de comunicaÁ„o: ' + E.Message);
-
-      end;
-    finally
-        jsonRequest.Free;
+        raise Exception.Create('Erro de comunica√ß√£o: ' + E.Message);
     end;
-
+  finally
+    jsonRequest.Free;
+  end;
 end;
+
 
 procedure Tdm.Login(email, senha: string);
 var
@@ -95,7 +92,7 @@ var
 begin
   jsonRequest := TJSONObject.Create;
   try
-    jsonRequest.AddPair('email', email);
+     jsonRequest.AddPair('email', LowerCase(Trim(email)));
     jsonRequest.AddPair('password', senha);
 
     try
@@ -123,7 +120,7 @@ begin
         raise Exception.Create('Erro no login: ' + resp.Content);
     except
       on E: Exception do
-        raise Exception.Create('Erro de comunicaÁ„o: ' + E.Message);
+        raise Exception.Create('Erro de comunica√ß√£o: ' + E.Message);
     end;
   finally
     jsonRequest.Free;
@@ -146,7 +143,7 @@ begin
 
     try
       resp := TRequest.New
-        .BaseURL(baseURL + '/usuarios/validar-sessao') // <- ROTA CORRETA
+        .BaseURL(baseURL + '/usuarios/validar-sessao')
         .AddBody(jsonRequest.ToString)
         .Accept('application/json')
         .Post;
@@ -155,7 +152,7 @@ begin
       begin
         jsonResponse := TJSONObject.ParseJSONValue(resp.Content) as TJSONObject;
         try
-          Result := jsonResponse.GetValue<Boolean>('sessao_valida', False); // <- precisa dessa chave no backend
+          Result := jsonResponse.GetValue<Boolean>('sessao_valida', False);
         finally
           jsonResponse.Free;
         end;

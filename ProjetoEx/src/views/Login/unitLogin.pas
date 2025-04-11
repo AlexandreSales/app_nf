@@ -40,9 +40,9 @@ uses
   RESTRequest4D,
   REST.Response.Adapter,
   common.consts,
-  FMX.BiometricAuth,
+ // FMX.BiometricAuth,
   System.IOUtils,
-  System.IniFiles;
+  System.IniFiles, FMX.BiometricAuth;
 
 type
   TfrmLogin = class(TForm)
@@ -62,7 +62,7 @@ type
     Label11: TLabel;
     edtUltimoNome: TEdit;
     tabEntrarComEmail: TTabItem;
-    Layout6: TLayout;
+    layMainLogin: TLayout;
     Label14: TLabel;
     edtSenha: TEdit;
     rectEntrar: TRectangle;
@@ -81,7 +81,7 @@ type
     Label1: TLabel;
     Label5: TLabel;
     lblTextUserCadastro: TLabel;
-    BiometricAuth: TBiometricAuth;
+   BiometricAuth: TBiometricAuth;
 
     procedure btnEntrarClick(Sender: TObject);
     procedure lblNovaContaClick(Sender: TObject);
@@ -97,8 +97,8 @@ type
     procedure TerminateCadastro(sender: TObject);
     procedure MostrarMensagemUsuario(const Msg: string);
     procedure MostrarMensagemUsuarioCadastro(const Msg: string);
-    procedure BiometricAuthAuthenticateFail(Sender: TObject;
-      const FailReason: TBiometricFailReason; const ResultMessage: string);
+   procedure BiometricAuthAuthenticateFail(Sender: TObject;
+     const FailReason: TBiometricFailReason; const ResultMessage: string);
     procedure BiometricAuthAuthenticateSuccess(Sender: TObject);
     procedure CarregarLoginSalvo;
     procedure SalvarLoginLocal(UserID: Integer);
@@ -180,16 +180,40 @@ end;
 
 procedure TfrmLogin.BiometricAuthAuthenticateSuccess(Sender: TObject);
 begin
-  TThread.Synchronize(nil,
+  TThread.CreateAnonymousThread(
     procedure
+    var
+      Resp: IResponse;
     begin
-      if not Assigned(frmClientes) then
-        Application.CreateForm(TfrmClientes, frmClientes);
-      frmClientes.Show;
-      Self.Hide;
+      try
+        Resp := TRequest.New
+          .BaseURL(baseURL + '/usuarios/ativar-biometria')
+          .AddBody(TJSONObject.Create.AddPair('user_id', TJSONNumber.Create(TSession.id)).ToString)
+          .Accept('application/json')
+          .Post;
+      except
+        on E: Exception do
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              MostrarMensagemUsuario('Erro ao ativar biometria: ' + E.Message);
+            end
+          );
+      end;
+
+      TThread.Synchronize(nil,
+        procedure
+        begin
+          if not Assigned(frmClientes) then
+            Application.CreateForm(TfrmClientes, frmClientes);
+          frmClientes.Show;
+          Self.Hide;
+        end
+      );
     end
-  );
+  ).Start;
 end;
+
 
 
 procedure TfrmLogin.SalvarLoginLocal(UserID: Integer);
@@ -217,12 +241,36 @@ begin
     TThread.CreateAnonymousThread(
       procedure
       var
-        SessaoValida: Boolean;
+        SessaoValida, CodigoExiste, BiometriaAtiva: Boolean;
+        resp: IResponse;
+        jsonRequest, jsonResponse: TJSONObject;
       begin
         SessaoValida := False;
+        CodigoExiste := False;
+        BiometriaAtiva := False;
 
         try
           SessaoValida := dm.ValidarSessao;
+
+          // Verificar código existente
+          jsonRequest := TJSONObject.Create;
+          jsonRequest.AddPair('user_id', TJSONNumber.Create(TSession.id));
+
+          resp := TRequest.New
+            .BaseURL(baseURL + '/usuarios/verificar-codigo-existente')
+            .AddBody(jsonRequest.ToString)
+            .Accept('application/json')
+            .Post;
+
+          jsonResponse := TJSONObject.ParseJSONValue(resp.Content) as TJSONObject;
+
+          if jsonResponse.GetValue<Boolean>('codigo_existe', False) then
+            CodigoExiste := True;
+
+          // Verificar se a biometria está ativada
+          if jsonResponse.TryGetValue<Boolean>('biometria_ativa', BiometriaAtiva) then
+            BiometriaAtiva := jsonResponse.GetValue<Boolean>('biometria_ativa', False);
+
         except
           SessaoValida := False;
         end;
@@ -230,7 +278,22 @@ begin
         TThread.Synchronize(nil,
           procedure
           begin
-            if SessaoValida then
+            if not SessaoValida then
+            begin
+              MostrarMensagemUsuario('Sessão inválida. Verifique o servidor.');
+              Exit;
+            end;
+
+            if not CodigoExiste then
+            begin
+              if not Assigned(AutenticacaoCode) then
+                Application.CreateForm(TAutenticacaoCode, AutenticacaoCode);
+              AutenticacaoCode.Show;
+              Exit;
+            end;
+
+            // Se código existe e biometria foi ativada
+            if BiometriaAtiva then
             begin
               if BiometricAuth.IsSupported and BiometricAuth.CanAuthenticate then
               begin
@@ -242,15 +305,25 @@ begin
                 MostrarMensagemUsuario('Biometria não disponível.');
             end
             else
-              MostrarMensagemUsuario('Sessão inválida. Verifique o servidor.');
+            begin
+              // Se biometria não está ativada, segue direto pro sistema
+              if not Assigned(frmClientes) then
+                Application.CreateForm(TfrmClientes, frmClientes);
+              frmClientes.Show;
+              Self.Hide;
+            end;
           end
         );
+
+        FreeAndNil(jsonRequest);
+        FreeAndNil(jsonResponse);
       end
     ).Start;
   end
   else
     MostrarMensagemUsuario('Login falhou. Verifique e-mail e senha.');
 end;
+
 
 
  procedure TfrmLogin.MostrarMensagemUsuario(const Msg: string);
@@ -280,27 +353,26 @@ end;
 
 procedure TfrmLogin.MostrarMensagemUsuarioCadastro(const Msg: string);
 begin
-  TThread.Synchronize(nil,
+  lblTextUserCadastro.Visible := True;
+  lblTextUserCadastro.Text := Msg;
+
+  TThread.CreateAnonymousThread(
     procedure
     begin
-      lblTextUserCadastro.visible := true;
-      lblTextUserCadastro.Text := Msg;
-
-      TThread.CreateAnonymousThread(
+      Sleep(3000);
+      TThread.Queue(nil,
         procedure
         begin
-          Sleep(3000);
-          TThread.Synchronize(nil,
-            procedure
-            begin
-              lblTextUserCadastro.Text := '';
-              lblTextUserCadastro.visible := false;
-            end
-          );
+          lblTextUserCadastro.Text := '';
+          lblTextUserCadastro.Visible := False;
+          edtNome.Text := '';
+          edtUltimoNome.Text := '';
+          edtEmailCadastro.Text := '';
+          edtSenhaCad.Text := '';
         end
-      ).Start;
+      );
     end
-  );
+  ).Start;
 end;
 
 procedure TfrmLogin.TerminateCadastro(Sender: TObject);
@@ -331,74 +403,79 @@ begin
 end;
 
 procedure TfrmLogin.btnCriarContaClick(Sender: TObject);
+var
+  Nome, Sobrenome, Email, Senha: string;
 begin
+  Nome := Trim(edtNome.Text);
+  Sobrenome := Trim(edtUltimoNome.Text);
+  Email := Trim(edtEmailCadastro.Text);
+  Senha := Trim(edtSenhaCad.Text);
+
+  // Validação rápida antes da thread
+  if Nome = '' then
+  begin
+    MostrarMensagemUsuarioCadastro('Por favor, preencha o campo Nome.');
+    Exit;
+  end;
+
+  if Sobrenome = '' then
+  begin
+    MostrarMensagemUsuarioCadastro('Por favor, preencha o campo Último nome.');
+    Exit;
+  end;
+
+  if Email = '' then
+  begin
+    MostrarMensagemUsuarioCadastro('Por favor, preencha o campo E-mail.');
+    Exit;
+  end;
+
+  if Senha = '' then
+  begin
+    MostrarMensagemUsuarioCadastro('Por favor, preencha o campo Senha.');
+    Exit;
+  end;
+
+  // Thread de cadastro
   TLoading.ExecuteThread(
     procedure
+    var
+      Msg: string;
+      LJson: TJSONObject;
     begin
-      if Trim(edtNome.Text) = '' then
-      begin
-        MostrarMensagemUsuarioCadastro('Por favor, preencha o campo Nome.');
-        Exit;
-      end;
-
-      if Trim(edtUltimoNome.Text) = '' then
-      begin
-        MostrarMensagemUsuarioCadastro('Por favor, preencha o campo Último nome.');
-        Exit;
-      end;
-
-      if Trim(edtEmailCadastro.Text) = '' then
-      begin
-        MostrarMensagemUsuarioCadastro('Por favor, preencha o campo E-mail.');
-        Exit;
-      end;
-
-      if Trim(edtSenhaCad.Text) = '' then
-      begin
-        MostrarMensagemUsuarioCadastro('Por favor, preencha o campo Senha.');
-        Exit;
-      end;
-
       try
-        Sleep(800);
-        dm.cadastrarUsuario(
-          edtNome.Text,
-          edtUltimoNome.Text,
-          edtEmailCadastro.Text,
-          edtSenhaCad.Text
-        );
+        dm.cadastrarUsuario(Nome, Sobrenome, Email, Senha);
       except
         on E: Exception do
         begin
+          Msg := E.Message;
+
+          if Msg.Contains('{') then
+          begin
+            try
+              LJson := TJSONObject.ParseJSONValue(Msg) as TJSONObject;
+              if Assigned(LJson) then
+              begin
+                Msg := LJson.GetValue<string>('message');
+                LJson.Free;
+              end;
+            except
+
+            end;
+          end
+          else if Msg.ToLower.Contains('httprequest') or Msg.ToLower.Contains('could not connect') then
+            Msg := 'Não foi possível conectar ao servidor. Verifique sua internet ou tente novamente.';
+
+
           TThread.Synchronize(nil,
             procedure
-            var
-              LJson: TJSONObject;
-              Msg: string;
             begin
-              Msg := E.Message;
-
-              if Msg.Contains('{') then
-              begin
-                try
-                  LJson := TJSONObject.ParseJSONValue(Msg) as TJSONObject;
-                  if Assigned(LJson) then
-                  begin
-                    Msg := LJson.GetValue<string>('message');
-                    LJson.Free;
-                  end;
-                except
-
-                end;
-              end;
-
               MostrarMensagemUsuarioCadastro('Erro ao cadastrar: ' + Msg);
             end
           );
         end;
       end;
     end,
-
     TerminateCadastro
   );
 end;

@@ -12,8 +12,9 @@ object frmLogin: TfrmLogin
   DesignerMasterStyle = 3
   object TabControl: TTabControl
     Align = Client
+    Margins.Bottom = 100.000000000000000000
     Size.Width = 318.000000000000000000
-    Size.Height = 790.000000000000000000
+    Size.Height = 690.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
     TabIndex = 2
@@ -21,11 +22,11 @@ object frmLogin: TfrmLogin
     TabPosition = None
     Sizes = (
       318s
-      790s
+      690s
       318s
-      790s
+      690s
       318s
-      790s)
+      690s)
     object tabLogin: TTabItem
       CustomIcon = <
         item
@@ -2425,7 +2426,7 @@ object frmLogin: TfrmLogin
         StyledSettings = []
         HitTest = True
         Margins.Bottom = 30.000000000000000000
-        Position.Y = 713.000000000000000000
+        Position.Y = 613.000000000000000000
         Size.Width = 318.000000000000000000
         Size.Height = 47.000000000000000000
         Size.PlatformDefault = False
@@ -2456,7 +2457,7 @@ object frmLogin: TfrmLogin
         Align = Center
         Margins.Top = 60.000000000000000000
         Size.Width = 293.000000000000000000
-        Size.Height = 524.000000000000000000
+        Size.Height = 572.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Label8: TLabel
@@ -2538,7 +2539,7 @@ object frmLogin: TfrmLogin
         object rectCriarConta: TRectangle
           Align = Bottom
           Fill.Color = xFF3D5AE8
-          Position.Y = 397.000000000000000000
+          Position.Y = 445.000000000000000000
           Size.Width = 293.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
@@ -2611,7 +2612,7 @@ object frmLogin: TfrmLogin
           StyledSettings = []
           HitTest = True
           Margins.Bottom = 30.000000000000000000
-          Position.Y = 447.000000000000000000
+          Position.Y = 495.000000000000000000
           Size.Width = 293.000000000000000000
           Size.Height = 47.000000000000000000
           Size.PlatformDefault = False
@@ -2645,7 +2646,7 @@ object frmLogin: TfrmLogin
           Margins.Top = 110.000000000000000000
           Position.Y = 493.000000000000000000
           Size.Width = 293.000000000000000000
-          Size.Height = 17.000000000000000000
+          Size.Height = 52.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = xFF0236DA
@@ -2662,9 +2663,9 @@ object frmLogin: TfrmLogin
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 50.000000000000000000
         Position.X = 10.000000000000000000
-        Position.Y = 701.000000000000000000
+        Position.Y = 592.000000000000000000
         Size.Width = 298.000000000000000000
-        Size.Height = 39.000000000000000000
+        Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
         XRadius = 4.000000000000000000
@@ -2700,10 +2701,10 @@ object frmLogin: TfrmLogin
       Text = 'tabEmail'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object Layout6: TLayout
+      object layMainLogin: TLayout
         Align = Center
         Size.Width = 293.000000000000000000
-        Size.Height = 396.000000000000000000
+        Size.Height = 187.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Label14: TLabel
@@ -2799,9 +2800,9 @@ object frmLogin: TfrmLogin
           StyledSettings = []
           HitTest = True
           Margins.Top = -50.000000000000000000
-          Position.Y = 365.000000000000000000
+          Position.Y = 352.000000000000000000
           Size.Width = 293.000000000000000000
-          Size.Height = 17.000000000000000000
+          Size.Height = 30.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = xFF0236DA
@@ -2850,9 +2851,9 @@ object frmLogin: TfrmLogin
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 50.000000000000000000
         Position.X = 10.000000000000000000
-        Position.Y = 701.000000000000000000
+        Position.Y = 599.000000000000000000
         Size.Width = 298.000000000000000000
-        Size.Height = 39.000000000000000000
+        Size.Height = 41.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
         XRadius = 4.000000000000000000

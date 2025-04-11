@@ -104,4 +104,15 @@ object AutenticacaoCode: TAutenticacaoCode
       TabOrder = 1
     end
   end
+  object BiometricAuth: TBiometricAuth
+    AllowedAttempts = 0
+    BiometricStrengths = [DeviceCredential]
+    PromptCancelButtonText = 'Cancelar'
+    PromptConfirmationRequired = False
+    PromptDescription = 'Voc'#234' precisa de autentica'#231#227'o'
+    PromptSubtitle = 'Para acessar, voc'#234' precisa se autenticar'
+    PromptTitle = 'Autentica'#231#227'o'
+    Left = 64
+    Top = 48
+  end
 end
