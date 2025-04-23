@@ -3,10 +3,25 @@ unit unitAutenticacaoCode;
 interface
 
 uses
-  System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Forms,
-  FMX.Dialogs, FMX.Edit, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Objects,
-  FMX.Layouts, RESTRequest4D, System.JSON, dmUsuario, usuarioClass, common.consts,
-  System.UITypes, FMX.BiometricAuth, FMX.DialogService.Async;
+  System.SysUtils,
+  System.Classes,
+  FMX.Types,
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Dialogs,
+  FMX.Edit,
+  FMX.StdCtrls,
+  FMX.Controls.Presentation,
+  FMX.Objects,
+  FMX.Layouts,
+  RESTRequest4D,
+  System.JSON,
+  dmUsuario,
+  usuarioClass,
+  common.consts,
+  System.UITypes,
+  FMX.BiometricAuth,
+  FMX.DialogService.Async;
 
 type
   TAutenticacaoCode = class(TForm)

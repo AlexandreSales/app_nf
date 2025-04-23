@@ -186,11 +186,11 @@ begin
       Resp: IResponse;
     begin
       try
-        Resp := TRequest.New
-          .BaseURL(baseURL + '/usuarios/ativar-biometria')
-          .AddBody(TJSONObject.Create.AddPair('user_id', TJSONNumber.Create(TSession.id)).ToString)
-          .Accept('application/json')
-          .Post;
+         Resp := TRequest.New
+        .BaseURL(baseURL + '/usuarios/biometria-logada')
+        .AddBody(TJSONObject.Create.AddPair('user_id', TJSONNumber.Create(TSession.id)).ToString)
+        .Accept('application/json')
+        .Post;
       except
         on E: Exception do
           TThread.Synchronize(nil,
@@ -213,7 +213,6 @@ begin
     end
   ).Start;
 end;
-
 
 
 procedure TfrmLogin.SalvarLoginLocal(UserID: Integer);

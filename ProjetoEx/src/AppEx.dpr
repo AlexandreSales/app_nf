@@ -14,7 +14,8 @@ uses
   UnitConfiguracoes in 'views\Config\UnitConfiguracoes.pas' {FrmConfiguracoes},
   DadosCadastraisClass in 'model\DadosCadastraisClass.pas',
   dmMeiDados in 'model\dmMeiDados.pas' {DataModuleMei: TDataModule},
-  uPermission in 'ultils\uPermission.pas';
+  uPermission in 'ultils\uPermission.pas',
+  UnitConfiguracoesGerais in 'views\Config\UnitConfiguracoesGerais.pas' {frmConfigGerais};
 
 {$R *.res}
 
@@ -23,5 +24,6 @@ begin
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmConfigGerais, frmConfigGerais);
   Application.Run;
 end.

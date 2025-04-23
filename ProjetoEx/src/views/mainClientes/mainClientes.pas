@@ -3,11 +3,27 @@ unit mainClientes;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListView,
-  FMX.TabControl,FMX.Ani,UnitConfiguracoes;
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  System.Classes,
+  System.Variants,
+  FMX.Types,
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Graphics,
+  FMX.Dialogs,
+  FMX.ListView.Types,
+  FMX.ListView.Appearances,
+  FMX.ListView.Adapters.Base,
+  FMX.Objects,
+  FMX.Controls.Presentation,
+  FMX.StdCtrls,
+  FMX.ListView,
+  FMX.TabControl,
+  FMX.Ani,
+  UnitConfiguracoes,
+  UnitConfiguracoesGerais;
 
 type
   TfrmClientes = class(TForm)
@@ -34,11 +50,16 @@ type
     imgAba2: TImage;
     imgAba3: TImage;
     rectIndicador: TRectangle;
+    rectConfigGerais: TRectangle;
+    Image1: TImage;
+    Config: TLabel;
+    Image2: TImage;
     procedure imgAba1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure imgAba2Click(Sender: TObject);
     procedure imgAba3Click(Sender: TObject);
     procedure rectItemConfigClick(Sender: TObject);
+    procedure rectConfigGeraisClick(Sender: TObject);
   private
     { Private declarations }
      procedure MudarAba(img: TImage);
@@ -89,9 +110,17 @@ begin
 
 end;
 
+procedure TfrmClientes.rectConfigGeraisClick(Sender: TObject);
+begin
+    if NOT Assigned(frmConfigGerais) then
+    Application.CreateForm(TfrmConfigGerais, frmConfigGerais);
+
+  frmConfigGerais.Show;
+end;
+
 procedure TfrmClientes.rectItemConfigClick(Sender: TObject);
 begin
-  if NOT Assigned(FrmConfiguracoes) then
+   if NOT Assigned(FrmConfiguracoes) then
     Application.CreateForm(TFrmConfiguracoes, FrmConfiguracoes);
 
   FrmConfiguracoes.Show;

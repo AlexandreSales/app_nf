@@ -1,7 +1,7 @@
 object FrmConfiguracoes: TFrmConfiguracoes
   Left = 0
   Top = 0
-  Caption = 'Configura'#231#245'es'
+  Caption = 'Configura'#231#245'es Gerais'
   ClientHeight = 868
   ClientWidth = 373
   Fill.Kind = Solid

@@ -415,6 +415,10 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="ultils\uPermission.pas"/>
+        <DCCReference Include="views\Config\UnitConfiguracoesGerais.pas">
+            <Form>frmConfigGerais</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
