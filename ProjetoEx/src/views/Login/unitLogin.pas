@@ -5,6 +5,9 @@ interface
 uses
   System.SysUtils,
   System.Classes,
+  System.IOUtils,
+  System.IniFiles,
+
   FMX.Types,
   FMX.Controls,
   FMX.Forms,
@@ -14,6 +17,11 @@ uses
   FMX.StdCtrls,
   FMX.Layouts,
   FMX.TabControl,
+
+  {$if not defined(mswindows)}
+    FMX.BiometricAuth,
+  {$endif}
+
   usuarioClass,
   utilsLoadig,
   FireDAC.Stan.Intf,
@@ -39,10 +47,7 @@ uses
   Web.HTTPApp,
   RESTRequest4D,
   REST.Response.Adapter,
-  common.consts,
- // FMX.BiometricAuth,
-  System.IOUtils,
-  System.IniFiles, FMX.BiometricAuth;
+  common.consts;
 
 type
   TfrmLogin = class(TForm)
@@ -81,7 +86,7 @@ type
     Label1: TLabel;
     Label5: TLabel;
     lblTextUserCadastro: TLabel;
-   BiometricAuth: TBiometricAuth;
+
 
     procedure btnEntrarClick(Sender: TObject);
     procedure lblNovaContaClick(Sender: TObject);
@@ -92,13 +97,18 @@ type
     procedure lblExit1Click(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
+    {$if not defined(mswindows)}
+      BiometricAuth: TBiometricAuth;
+      procedure BiometricAuthAuthenticateFail(Sender: TObject; const FailReason: TBiometricFailReason; const ResultMessage: string);
+    {$endif}
+
     procedure TerminateLoading(sender: TObject);
     procedure TerminateCadastro(sender: TObject);
     procedure MostrarMensagemUsuario(const Msg: string);
     procedure MostrarMensagemUsuarioCadastro(const Msg: string);
-   procedure BiometricAuthAuthenticateFail(Sender: TObject;
-     const FailReason: TBiometricFailReason; const ResultMessage: string);
+
     procedure BiometricAuthAuthenticateSuccess(Sender: TObject);
     procedure CarregarLoginSalvo;
     procedure SalvarLoginLocal(UserID: Integer);
@@ -160,17 +170,38 @@ end;
 
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
+  {$if not defined(mswindows)}
+    if BiometricAuth = nil then
+      BiometricAuth := tbiometricAuth.create(self);
+
+    BiometricAuth.BiometricStrengths := [TBiometricStrength.DeviceCredential];
+    BiometricAuth.PromptCancelButtonText := 'Cancelar';
+    BiometricAuth.PromptConfirmationRequired := false;
+    BiometricAuth.PromptDescription := 'Você precisa de autenticação';
+    BiometricAuth.PromptSubtitle := 'Para acessar, você precisa se autenticar';
+    BiometricAuth.PromptTitle := 'Autenticação';
+
+    BiometricAuth.OnAuthenticateSuccess := BiometricAuthAuthenticateSuccess;
+    BiometricAuth.OnAuthenticateFail := BiometricAuthAuthenticateFail;
+  {$endif}
+
   TabControl.GotoVisibleTab(0);
   CarregarLoginSalvo;
-  BiometricAuth.OnAuthenticateSuccess := BiometricAuthAuthenticateSuccess;
-  BiometricAuth.OnAuthenticateFail := BiometricAuthAuthenticateFail;
+end;
+
+procedure TfrmLogin.FormDestroy(Sender: TObject);
+begin
+  {$if not defined(mswindows)}
+    if BiometricAuth <> nil then
+      freeAndNIl(BiometricAuth);
+  {$endif}
 end;
 
 procedure TfrmLogin.CarregarLoginSalvo;
 var
   Ini: TIniFile;
 begin
-  Ini := TIniFile.Create(TPath.Combine(TPath.GetDocumentsPath, 'config.ini'));
+  Ini := TIniFile.Create(System.IOUtils.TPath.Combine(System.IOUtils.TPath.GetDocumentsPath, 'config.ini'));
   try
     TSession.id := Ini.ReadInteger('Login', 'UserID', 0);
   finally
@@ -219,7 +250,7 @@ procedure TfrmLogin.SalvarLoginLocal(UserID: Integer);
 var
   Ini: TIniFile;
 begin
-  Ini := TIniFile.Create(TPath.Combine(TPath.GetDocumentsPath, 'config.ini'));
+  Ini := TIniFile.Create(System.IOUtils.TPath.Combine(System.IOUtils.TPath.GetDocumentsPath, 'config.ini'));
   try
     Ini.WriteInteger('Login', 'UserID', UserID);
   finally
@@ -227,11 +258,12 @@ begin
   end;
 end;
 
-procedure TfrmLogin.BiometricAuthAuthenticateFail(Sender: TObject;
-  const FailReason: TBiometricFailReason; const ResultMessage: string);
-begin
-  MostrarMensagemUsuario('Falha na autenticação biométrica: ' + ResultMessage);
-end;
+{$if not defined(mswindows)}
+  procedure TfrmLogin.BiometricAuthAuthenticateFail(Sender: TObject; const FailReason: TBiometricFailReason; const ResultMessage: string);
+  begin
+    MostrarMensagemUsuario('Falha na autenticação biométrica: ' + ResultMessage);
+  end;
+{$endif}
 
 procedure TfrmLogin.TerminateLoading(Sender: TObject);
 begin
@@ -292,16 +324,22 @@ begin
             end;
 
             // Se código existe e biometria foi ativada
+            {$if defined(mswindows)}
+              BiometriaAtiva := true;
+            {$endif}
+
             if BiometriaAtiva then
             begin
-              if BiometricAuth.IsSupported and BiometricAuth.CanAuthenticate then
-              begin
-                BiometricAuth.OnAuthenticateSuccess := BiometricAuthAuthenticateSuccess;
-                BiometricAuth.OnAuthenticateFail := BiometricAuthAuthenticateFail;
-                BiometricAuth.Authenticate;
-              end
-              else
-                MostrarMensagemUsuario('Biometria não disponível.');
+              {$if not defined(mswindows)}
+                if BiometricAuth.IsSupported and BiometricAuth.CanAuthenticate then
+                begin
+                  BiometricAuth.OnAuthenticateSuccess := BiometricAuthAuthenticateSuccess;
+                  BiometricAuth.OnAuthenticateFail := BiometricAuthAuthenticateFail;
+                  BiometricAuth.Authenticate;
+                end
+                else
+                  MostrarMensagemUsuario('Biometria não disponível.');
+              {$endif}
             end
             else
             begin

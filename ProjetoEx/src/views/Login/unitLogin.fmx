@@ -9,6 +9,7 @@ object frmLogin: TfrmLogin
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 3
   object TabControl: TTabControl
     Align = Client
@@ -17,7 +18,7 @@ object frmLogin: TfrmLogin
     Size.Height = 690.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     TabPosition = None
     Sizes = (
@@ -32,7 +33,7 @@ object frmLogin: TfrmLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -2444,7 +2445,7 @@ object frmLogin: TfrmLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -2874,16 +2875,5 @@ object frmLogin: TfrmLogin
         end
       end
     end
-  end
-  object BiometricAuth: TBiometricAuth
-    AllowedAttempts = 0
-    BiometricStrengths = [DeviceCredential]
-    PromptCancelButtonText = 'Cancelar'
-    PromptConfirmationRequired = False
-    PromptDescription = 'Voc'#234' precisa de autentica'#231#227'o'
-    PromptSubtitle = 'Para acessar, voc'#234' precisa se autenticar'
-    PromptTitle = 'Autentica'#231#227'o'
-    Left = 64
-    Top = 48
   end
 end

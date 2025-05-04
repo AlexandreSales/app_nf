@@ -6,7 +6,7 @@ interface
 
 const
   {$if defined(test)}
-    baseURL = 'http://192.168.1.112:3000';
+    baseURL = 'http://192.168.0.77:3000';
   {$endif}
 
   {$if defined(production)}

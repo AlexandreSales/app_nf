@@ -16,7 +16,6 @@ uses
   FMX.Controls.Presentation,
   FMX.StdCtrls,
   FMX.Objects,
-  FMX.BiometricAuth,
   usuarioClass,
   common.consts,
   RESTRequest4D,

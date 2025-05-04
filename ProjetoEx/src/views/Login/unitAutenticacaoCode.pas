@@ -5,6 +5,9 @@ interface
 uses
   System.SysUtils,
   System.Classes,
+  System.UITypes,
+  System.JSON,
+
   FMX.Types,
   FMX.Controls,
   FMX.Forms,
@@ -14,14 +17,16 @@ uses
   FMX.Controls.Presentation,
   FMX.Objects,
   FMX.Layouts,
+  FMX.DialogService.Async,
+
+  {$if not defined(mswindows)}
+    FMX.BiometricAuth,
+  {$endif}
+
   RESTRequest4D,
-  System.JSON,
   dmUsuario,
   usuarioClass,
-  common.consts,
-  System.UITypes,
-  FMX.BiometricAuth,
-  FMX.DialogService.Async;
+  common.consts;
 
 type
   TAutenticacaoCode = class(TForm)
@@ -32,13 +37,19 @@ type
     edtcode: TEdit;
     lblNewConta: TLabel;
     Label2: TLabel;
-    BiometricAuth: TBiometricAuth;
     procedure btnValidarClick(Sender: TObject);
     procedure lblNewContaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BiometricAuthSuccess(Sender: TObject);
-    procedure BiometricAuthFail(Sender: TObject; const FailReason: TBiometricFailReason; const ResultMessage: string);
+
+    {$if not defined(mswindows)}
+      procedure BiometricAuthFail(Sender: TObject; const FailReason: TBiometricFailReason; const ResultMessage: string);
+    {$endif}
   private
+    {$if not defined(mswindows)}
+      BiometricAuth: TBiometricAuth;
+    {$endif}
+
     procedure ValidateCode;
     procedure EnviarCodigoAutenticacao;
     procedure PerguntarBiometria;
@@ -57,8 +68,20 @@ uses mainClientes;
 
 procedure TAutenticacaoCode.FormCreate(Sender: TObject);
 begin
-  BiometricAuth.OnAuthenticateSuccess := BiometricAuthSuccess;
-  BiometricAuth.OnAuthenticateFail := BiometricAuthFail;
+  {$if not defined(mswindows)}
+    if BiometricAuth = nil then
+      BiometricAuth := tbiometricAuth.create(self);
+
+    BiometricAuth.BiometricStrengths := [TBiometricStrength.DeviceCredential];
+    BiometricAuth.PromptCancelButtonText := 'Cancelar';
+    BiometricAuth.PromptConfirmationRequired := false;
+    BiometricAuth.PromptDescription := 'Você precisa de autenticação';
+    BiometricAuth.PromptSubtitle := 'Para acessar, você precisa se autenticar';
+    BiometricAuth.PromptTitle := 'Autenticação';
+
+    BiometricAuth.OnAuthenticateSuccess := BiometricAuthSuccess;
+    BiometricAuth.OnAuthenticateFail := BiometricAuthFail;
+  {$endif}
 end;
 
 procedure TAutenticacaoCode.btnValidarClick(Sender: TObject);
@@ -110,42 +133,44 @@ end;
 
 procedure TAutenticacaoCode.PerguntarBiometria;
 begin
-  if BiometricAuth.IsSupported and BiometricAuth.CanAuthenticate then
-  begin
-    TDialogServiceAsync.MessageDialog(
-      'Deseja ativar o login por digital?',
-      TMsgDlgType.mtConfirmation,
-      [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
-      TMsgDlgBtn.mbNo,
-      0,
-      procedure(const AResult: TModalResult)
-      begin
-        if AResult = mrYes then
+  {$if not defined(mswindows)}
+    if BiometricAuth.IsSupported and BiometricAuth.CanAuthenticate then
+    begin
+      TDialogServiceAsync.MessageDialog(
+        'Deseja ativar o login por digital?',
+        TMsgDlgType.mtConfirmation,
+        [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
+        TMsgDlgBtn.mbNo,
+        0,
+        procedure(const AResult: TModalResult)
         begin
-           BiometricAuth.Authenticate;
-          AtivarBiometria;
+          if AResult = mrYes then
+          begin
+             BiometricAuth.Authenticate;
+            AtivarBiometria;
+          end
+          else
+          begin
+            // Fecha esta tela e volta para o login
+            Self.Close;
+            if Assigned(Self.Owner) then
+              TForm(Self.Owner).Show
+            else if Assigned(Application.MainForm) then
+              Application.MainForm.Show;
+          end;
         end
-        else
-        begin
-          // Fecha esta tela e volta para o login
-          Self.Close;
-          if Assigned(Self.Owner) then
-            TForm(Self.Owner).Show
-          else if Assigned(Application.MainForm) then
-            Application.MainForm.Show;
-        end;
-      end
-    );
-  end
-  else
-  begin
-    ShowMessage('Seu dispositivo não suporta biometria.');
-    Self.Close;
-    if Assigned(Self.Owner) then
-      TForm(Self.Owner).Show
-    else if Assigned(Application.MainForm) then
-      Application.MainForm.Show;
-  end;
+      );
+    end
+    else
+    begin
+      ShowMessage('Seu dispositivo não suporta biometria.');
+      Self.Close;
+      if Assigned(Self.Owner) then
+        TForm(Self.Owner).Show
+      else if Assigned(Application.MainForm) then
+        Application.MainForm.Show;
+    end;
+  {$endif}
 end;
 
 procedure TAutenticacaoCode.BiometricAuthSuccess(Sender: TObject);
@@ -153,10 +178,12 @@ begin
   AtivarBiometria;
 end;
 
-procedure TAutenticacaoCode.BiometricAuthFail(Sender: TObject; const FailReason: TBiometricFailReason; const ResultMessage: string);
-begin
-  ShowMessage('Autenticação falhou: ' + ResultMessage);
-end;
+{$if not defined(mswindows)}
+  procedure TAutenticacaoCode.BiometricAuthFail(Sender: TObject; const FailReason: TBiometricFailReason; const ResultMessage: string);
+  begin
+    ShowMessage('Autenticação falhou: ' + ResultMessage);
+  end;
+{$endif}
 
 procedure TAutenticacaoCode.AtivarBiometria;
 var

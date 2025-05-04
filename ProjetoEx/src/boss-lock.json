@@ -6,6 +6,26 @@
 			"name": "facebook-login",
 			"version": "0.1.0",
 			"hash": "cb5b841e3e67efea2de4032851e3fff4",
+			"artifacts": {
+				"dcp": [
+					"FacebookLogin.bpi",
+					"FacebookLogin.dcp",
+					"FacebookLogin.lib"
+				],
+				"dcu": [
+					"FMX.FacebookLogin.dcu"
+				],
+				"bpl": [
+					"FacebookLogin.bpl"
+				]
+			},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/viniciussanchez/restrequest4delphi": {
+			"name": "restrequest4delphi",
+			"version": "v4.0.23",
+			"hash": "9c56b6064b12085cf05b0696a11ea6e4",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
