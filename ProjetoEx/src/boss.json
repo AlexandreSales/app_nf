@@ -6,6 +6,7 @@
 	"mainsrc": "./src",
 	"projects": [],
 	"dependencies": {
-		"github.com/hashload/facebook-login": "^0.1.0"
+		"github.com/hashload/facebook-login": "^0.1.0",
+		"github.com/viniciussanchez/restrequest4delphi": "^v4.0.23"
 	}
 }

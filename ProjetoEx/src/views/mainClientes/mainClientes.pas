@@ -36,7 +36,6 @@ type
     lvCardapio: TListView;
     TabItem3: TTabItem;
     Rectangle3: TRectangle;
-    Label3: TLabel;
     rectItemConfig: TRectangle;
     Image3: TImage;
     Label6: TLabel;
@@ -54,6 +53,7 @@ type
     Image1: TImage;
     Config: TLabel;
     Image2: TImage;
+    Label3: TLabel;
     procedure imgAba1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure imgAba2Click(Sender: TObject);
