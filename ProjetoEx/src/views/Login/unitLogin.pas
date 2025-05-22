@@ -33,7 +33,6 @@ uses
   Data.Bind.ObjectScope,
   REST.Authenticator.OAuth,
   REST.Utils,
-  loginFacebook,
   System.UITypes,
   System.JSON,
   Web.HTTPApp,
@@ -98,7 +97,10 @@ type
     procedure lblExit1Click(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
   private
+     AlturaOriginalLayout4: Single;
      CadastroOk: Boolean;
      FVKBounds: TRect;
     FKeyboardVisible: Boolean;
@@ -112,6 +114,8 @@ type
     procedure CarregarLoginSalvo;
     procedure SalvarLoginLocal(UserID: Integer);
     procedure AjustarScroll(Sender: TObject);
+    procedure OnVirtualKeyboardShown(Sender: TObject;
+      const KeyboardBounds: TRect);
 
   public
     { Public declarations }
@@ -123,6 +127,9 @@ var
 implementation
 
 {$R *.fmx}
+{$R *.XLgXhdpiTb.fmx ANDROID}
+{$R *.LgXhdpiTb.fmx ANDROID}
+{$R *.Moto360.fmx ANDROID}
 
 uses dmUsuario, mainClientes, unitAutenticacaoCode;
 
@@ -172,6 +179,7 @@ end;
 
 procedure TfrmLogin.FormCreate(Sender: TObject);
 begin
+  AlturaOriginalLayout4 := 0;
   TabControl.GotoVisibleTab(0);
   CarregarLoginSalvo;
 
@@ -184,6 +192,59 @@ begin
   edtEmailCadastro.OnEnter := AjustarScroll;
   edtSenhaCad.OnEnter := AjustarScroll;
 end;
+
+procedure TfrmLogin.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+var
+  KeyboardHeight: Single;
+  ScreenSize: TPointF;
+  ScreenService: IFMXScreenService;
+  i: Integer;
+  Focado: TControl;
+  CampoPosicao, ScrollPosicao: TPointF;
+  Deslocamento: Single;
+begin
+  if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, ScreenService) then
+    ScreenSize := ScreenService.GetScreenSize
+  else
+    Exit;
+
+  KeyboardHeight := ScreenSize.Y - Bounds.Top;
+
+  if KeyboardVisible then
+  begin
+    // Salva a altura original só uma vez
+    if AlturaOriginalLayout4 = 0 then
+      AlturaOriginalLayout4 := Layout4.Height;
+
+    SBNovaConta.Padding.Bottom := KeyboardHeight;
+    Layout4.Height := AlturaOriginalLayout4 + KeyboardHeight;
+
+    // Rola até o campo focado
+    for i := 0 to Layout4.ChildrenCount - 1 do
+    begin
+      if (Layout4.Children[i] is TEdit) and (TEdit(Layout4.Children[i]).IsFocused) then
+      begin
+        Focado := TEdit(Layout4.Children[i]);
+        CampoPosicao := Focado.LocalToAbsolute(PointF(0, 0));
+        ScrollPosicao := SBNovaConta.LocalToAbsolute(PointF(0, 0));
+        Deslocamento := CampoPosicao.Y - ScrollPosicao.Y;
+        SBNovaConta.ViewportPosition := PointF(0, Deslocamento - KeyboardHeight / 2);
+        Break;
+      end;
+    end;
+  end
+  else
+  begin
+    SBNovaConta.Padding.Bottom := 0;
+
+    // Restaura a altura original se já tiver sido salva
+    if AlturaOriginalLayout4 > 0 then
+      Layout4.Height := AlturaOriginalLayout4;
+  end;
+end;
+
+
 
 procedure TfrmLogin.AjustarScroll(Sender: TObject);
 begin
@@ -640,6 +701,16 @@ begin
       end;
     end
   ).Start;
+end;
+
+
+procedure TfrmLogin.OnVirtualKeyboardShown(Sender: TObject; const KeyboardBounds: TRect);
+begin
+  // Captura a altura do teclado virtual
+  var tecladoAltura := KeyboardBounds.Height;
+
+  // Move o ScrollBox para cima ou aumenta a altura do conteúdo se necessário
+  SBNovaConta.ViewportPosition := PointF(0, edtSenhaCad.Position.Y - tecladoAltura / 2);
 end;
 
 

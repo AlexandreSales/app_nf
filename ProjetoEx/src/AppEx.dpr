@@ -6,7 +6,6 @@ uses
   unitLogin in 'views\Login\unitLogin.pas' {frmLogin},
   dmUsuario in 'model\dmUsuario.pas' {dm: TDataModule},
   usuarioClass in 'model\usuarioClass.pas',
-  loginFacebook in 'views\Login\loginFacebook.pas' {frmLoginFacebook},
   mainClientes in 'views\mainClientes\mainClientes.pas' {frmClientes},
   utilsLoadig in 'ultils\utilsLoadig.pas',
   common.consts in 'common\common.consts.pas',

@@ -2,37 +2,38 @@ object frmLogin: TfrmLogin
   Left = 0
   Top = 0
   Caption = 'Login'
-  ClientHeight = 790
-  ClientWidth = 318
+  ClientHeight = 668
+  ClientWidth = 335
   Fill.Kind = Solid
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
-  DesignerMasterStyle = 3
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  DesignerMasterStyle = 0
   object TabControl: TTabControl
     Align = Client
-    Margins.Bottom = 100.000000000000000000
-    Size.Width = 318.000000000000000000
-    Size.Height = 690.000000000000000000
+    ClipChildren = True
+    Size.Width = 335.000000000000000000
+    Size.Height = 668.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     TabPosition = None
     Sizes = (
-      318s
-      690s
-      318s
-      690s
-      318s
-      690s)
+      335s
+      668s
+      335s
+      668s
+      335s
+      668s)
     object tabLogin: TTabItem
       CustomIcon = <
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -63,7 +64,7 @@ object frmLogin: TfrmLogin
             Cursor = crHandPoint
             StyledSettings = [Family]
             Size.Width = 293.000000000000000000
-            Size.Height = 48.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Text = 'Login'
             TextSettings.Font.Size = 16.000000000000000000
@@ -2443,8 +2444,8 @@ object frmLogin: TfrmLogin
         StyledSettings = []
         HitTest = True
         Margins.Bottom = 30.000000000000000000
-        Position.Y = 613.000000000000000000
-        Size.Width = 318.000000000000000000
+        Position.Y = 591.000000000000000000
+        Size.Width = 335.000000000000000000
         Size.Height = 47.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -2461,7 +2462,7 @@ object frmLogin: TfrmLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -2472,60 +2473,50 @@ object frmLogin: TfrmLogin
       ExplicitSize.cy = 8.000000000000000000
       object SBNovaConta: TScrollBox
         Align = Client
-        Size.Width = 318.000000000000000000
-        Size.Height = 690.000000000000000000
+        Size.Width = 335.000000000000000000
+        Size.Height = 619.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Viewport.Width = 313.000000000000000000
-        Viewport.Height = 690.000000000000000000
+        ParentShowHint = False
+        ShowHint = False
+        AutoHide = False
+        Viewport.Width = 319.000000000000000000
+        Viewport.Height = 603.000000000000000000
         object Layout4: TLayout
-          Align = Center
-          Margins.Top = 60.000000000000000000
-          Size.Width = 293.000000000000000000
-          Size.Height = 655.000000000000000000
+          Align = Top
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
+          Position.X = 20.000000000000000000
+          Size.Width = 279.000000000000000000
+          Size.Height = 200.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
-          object Label8: TLabel
-            Align = Top
-            StyledSettings = []
-            Margins.Top = 10.000000000000000000
-            Position.Y = 10.000000000000000000
-            Size.Width = 293.000000000000000000
-            Size.Height = 17.000000000000000000
-            Size.PlatformDefault = False
-            TextSettings.Font.Size = 18.000000000000000000
-            TextSettings.Font.StyleExt = {00060000000000000004000000}
-            TextSettings.FontColor = xFF1E1A19
-            TextSettings.HorzAlign = Center
-            Text = 'Criar uma conta'
-            TabOrder = 2
-          end
           object Label9: TLabel
             Align = Top
             StyledSettings = [Family, FontColor]
             Margins.Left = 10.000000000000000000
             Margins.Top = 30.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 57.000000000000000000
-            Size.Width = 283.000000000000000000
+            Position.Y = 30.000000000000000000
+            Size.Width = 269.000000000000000000
             Size.Height = 17.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 14.000000000000000000
             TextSettings.Font.StyleExt = {00060000000000000004000000}
             Text = 'Nome'
-            TabOrder = 9
+            TabOrder = 8
           end
           object edtNome: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Top
-            TabOrder = 10
+            TabOrder = 9
             TextSettings.Font.Size = 14.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 84.000000000000000000
+            Position.Y = 57.000000000000000000
             Margins.Left = 10.000000000000000000
             Margins.Top = 10.000000000000000000
             Margins.Right = 10.000000000000000000
-            Size.Width = 273.000000000000000000
+            Size.Width = 259.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             StyledSettings = [Family, Style, FontColor]
@@ -2536,36 +2527,37 @@ object frmLogin: TfrmLogin
             Margins.Left = 10.000000000000000000
             Margins.Top = 30.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 324.000000000000000000
-            Size.Width = 283.000000000000000000
+            Position.Y = 297.000000000000000000
+            Size.Width = 269.000000000000000000
             Size.Height = 17.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 14.000000000000000000
             TextSettings.Font.StyleExt = {00060000000000000004000000}
             Text = 'Senha'
-            TabOrder = 4
+            TabOrder = 3
           end
           object edtSenhaCad: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Top
-            TabOrder = 6
+            TabOrder = 5
             Password = True
             TextSettings.Font.Size = 14.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 351.000000000000000000
+            Position.Y = 324.000000000000000000
             Margins.Left = 10.000000000000000000
             Margins.Top = 10.000000000000000000
             Margins.Right = 10.000000000000000000
-            Size.Width = 273.000000000000000000
+            Size.Width = 259.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             StyledSettings = [Family, Style, FontColor]
           end
           object rectCriarConta: TRectangle
-            Align = Bottom
+            Align = Top
             Fill.Color = xFF3D5AE8
-            Position.Y = 420.000000000000000000
-            Size.Width = 293.000000000000000000
+            Margins.Top = 20.000000000000000000
+            Position.Y = 376.000000000000000000
+            Size.Width = 279.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
@@ -2592,26 +2584,26 @@ object frmLogin: TfrmLogin
             Margins.Left = 10.000000000000000000
             Margins.Top = 30.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 146.000000000000000000
-            Size.Width = 283.000000000000000000
+            Position.Y = 119.000000000000000000
+            Size.Width = 269.000000000000000000
             Size.Height = 17.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 14.000000000000000000
             TextSettings.Font.StyleExt = {00060000000000000004000000}
             Text = #218'ltimo nome'
-            TabOrder = 7
+            TabOrder = 6
           end
           object edtUltimoNome: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Top
-            TabOrder = 8
+            TabOrder = 7
             TextSettings.Font.Size = 14.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 173.000000000000000000
+            Position.Y = 146.000000000000000000
             Margins.Left = 10.000000000000000000
             Margins.Top = 10.000000000000000000
             Margins.Right = 10.000000000000000000
-            Size.Width = 273.000000000000000000
+            Size.Width = 259.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             StyledSettings = [Family, Style, FontColor]
@@ -2622,26 +2614,26 @@ object frmLogin: TfrmLogin
             Margins.Left = 10.000000000000000000
             Margins.Top = 30.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 235.000000000000000000
-            Size.Width = 283.000000000000000000
+            Position.Y = 208.000000000000000000
+            Size.Width = 269.000000000000000000
             Size.Height = 17.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 14.000000000000000000
             TextSettings.Font.StyleExt = {00060000000000000004000000}
             Text = 'E-mail'
-            TabOrder = 3
+            TabOrder = 2
           end
           object edtEmailCadastro: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Top
-            TabOrder = 5
+            TabOrder = 4
             TextSettings.Font.Size = 14.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 262.000000000000000000
+            Position.Y = 235.000000000000000000
             Margins.Left = 10.000000000000000000
             Margins.Top = 10.000000000000000000
             Margins.Right = 10.000000000000000000
-            Size.Width = 273.000000000000000000
+            Size.Width = 259.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             StyledSettings = [Family, Style, FontColor]
@@ -2664,28 +2656,28 @@ object frmLogin: TfrmLogin
             TabOrder = 1
           end
           object Label4: TLabel
-            Align = Bottom
+            Align = Top
             Cursor = crHandPoint
             StyledSettings = []
             HitTest = True
             Margins.Bottom = 30.000000000000000000
-            Position.Y = 470.000000000000000000
-            Size.Width = 293.000000000000000000
-            Size.Height = 57.000000000000000000
+            Position.Y = 426.000000000000000000
+            Size.Width = 279.000000000000000000
+            Size.Height = 62.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 11.000000000000000000
             TextSettings.HorzAlign = Center
             TabOrder = 0
           end
           object Rectangle2: TRectangle
-            Align = Bottom
+            Align = Top
             Fill.Color = xFFF1F0F0
             Margins.Left = 10.000000000000000000
             Margins.Right = 10.000000000000000000
             Margins.Bottom = 50.000000000000000000
             Position.X = 10.000000000000000000
-            Position.Y = 557.000000000000000000
-            Size.Width = 273.000000000000000000
+            Position.Y = 518.000000000000000000
+            Size.Width = 259.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
@@ -2696,7 +2688,7 @@ object frmLogin: TfrmLogin
               Cursor = crHandPoint
               StyledSettings = [Family]
               Margins.Left = 10.000000000000000000
-              Size.Width = 263.000000000000000000
+              Size.Width = 249.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
               Text = 'Voltar'
@@ -2707,6 +2699,21 @@ object frmLogin: TfrmLogin
             end
           end
         end
+      end
+      object Label8: TLabel
+        Align = Top
+        StyledSettings = []
+        Margins.Top = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 335.000000000000000000
+        Size.Height = 39.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF1E1A19
+        TextSettings.HorzAlign = Center
+        Text = 'Criar uma conta'
+        TabOrder = 2
       end
     end
     object tabEntrarComEmail: TTabItem
@@ -2777,7 +2784,7 @@ object frmLogin: TfrmLogin
             Cursor = crHandPoint
             StyledSettings = [Family]
             Size.Width = 293.000000000000000000
-            Size.Height = 48.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Text = 'Entrar'
             TextSettings.Font.Size = 16.000000000000000000
@@ -2874,8 +2881,8 @@ object frmLogin: TfrmLogin
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 50.000000000000000000
         Position.X = 10.000000000000000000
-        Position.Y = 599.000000000000000000
-        Size.Width = 298.000000000000000000
+        Position.Y = 577.000000000000000000
+        Size.Width = 315.000000000000000000
         Size.Height = 41.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
@@ -2886,8 +2893,8 @@ object frmLogin: TfrmLogin
           Cursor = crHandPoint
           StyledSettings = [Family]
           Margins.Left = 10.000000000000000000
-          Size.Width = 288.000000000000000000
-          Size.Height = 48.000000000000000000
+          Size.Width = 305.000000000000000000
+          Size.Height = 41.000000000000000000
           Size.PlatformDefault = False
           Text = 'Voltar'
           TextSettings.Font.Size = 16.000000000000000000
@@ -2906,7 +2913,7 @@ object frmLogin: TfrmLogin
     PromptDescription = 'Voc'#234' precisa de autentica'#231#227'o'
     PromptSubtitle = 'Para acessar, voc'#234' precisa se autenticar'
     PromptTitle = 'Autentica'#231#227'o'
-    Left = 64
-    Top = 48
+    Left = 208
+    Top = 32
   end
 end

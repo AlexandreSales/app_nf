@@ -326,10 +326,6 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="model\usuarioClass.pas"/>
-        <DCCReference Include="views\Login\loginFacebook.pas">
-            <Form>frmLoginFacebook</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="views\mainClientes\mainClientes.pas">
             <Form>frmClientes</Form>
             <FormType>fmx</FormType>
