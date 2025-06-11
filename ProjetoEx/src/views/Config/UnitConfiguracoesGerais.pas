@@ -24,10 +24,12 @@ uses
 type
   TfrmConfigGerais = class(TForm)
     Rectangle3: TRectangle;
-    Label3: TLabel;
     Label15: TLabel;
     SwtDigital: TSwitch;
+    imgFechar: TImage;
+    Label3: TLabel;
     procedure FormShow(Sender: TObject);
+    procedure imgFecharClick(Sender: TObject);
   private
     CarregandoInicial: Boolean;
     procedure SwtDigitalSwitch(Sender: TObject);
@@ -46,6 +48,11 @@ implementation
 procedure TfrmConfigGerais.FormShow(Sender: TObject);
 begin
    CarregarStatusBiometria;
+end;
+
+procedure TfrmConfigGerais.imgFecharClick(Sender: TObject);
+begin
+ Close;
 end;
 
 procedure TfrmConfigGerais.CarregarStatusBiometria;

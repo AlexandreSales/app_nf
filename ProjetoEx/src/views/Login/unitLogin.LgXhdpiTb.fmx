@@ -1,0 +1,133 @@
+inherited frmLogin_LgXhdpiTb: TfrmLogin_LgXhdpiTb
+  ClientHeight = 829
+  ClientWidth = 480
+  DesignerMasterStyle = 0
+  inherited TabControl: TTabControl
+    Margins.Bottom = 100.000000000000000000
+    Size.Width = 480.000000000000000000
+    Size.Height = 729.000000000000000000
+    Sizes = (
+      480s
+      729s
+      480s
+      729s
+      480s
+      729s)
+    inherited tabLogin: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      inherited Layout2: TLayout
+        inherited rectEmail: TRectangle
+          inherited btnAcessarEmail: TSpeedButton
+            Size.Height = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+          end
+        end
+        inherited Layout1: TLayout
+          inherited Image1: TImage
+            MultiResBitmap.Height = 75
+            MultiResBitmap.Width = 113
+          end
+        end
+      end
+      inherited lblCriarConta: TLabel
+        Position.Y = 652.000000000000000000
+        Size.Width = 480.000000000000000000
+      end
+    end
+    inherited tabNovaConta: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      inherited SBNovaConta: TScrollBox
+        Size.Width = 480.000000000000000000
+        Size.Height = 680.000000000000000000
+        Viewport.Width = 475.000000000000000000
+        Viewport.Height = 675.000000000000000000
+        inherited Layout4: TLayout
+          Margins.Top = 50.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Position.Y = 50.000000000000000000
+          Size.Width = 435.000000000000000000
+          inherited Label9: TLabel
+            Size.Width = 425.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+          end
+          inherited edtNome: TEdit
+            Size.Width = 415.000000000000000000
+          end
+          inherited Label10: TLabel
+            Size.Width = 425.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+          end
+          inherited edtSenhaCad: TEdit
+            Size.Width = 415.000000000000000000
+          end
+          inherited rectCriarConta: TRectangle
+            Size.Width = 435.000000000000000000
+            inherited btnCriarConta: TSpeedButton
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+            end
+          end
+          inherited Label11: TLabel
+            Size.Width = 425.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+          end
+          inherited edtUltimoNome: TEdit
+            Size.Width = 415.000000000000000000
+          end
+          inherited Label3: TLabel
+            Size.Width = 425.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+          end
+          inherited edtEmailCadastro: TEdit
+            Size.Width = 415.000000000000000000
+          end
+          inherited Label4: TLabel
+            Size.Width = 435.000000000000000000
+          end
+          inherited Rectangle2: TRectangle
+            Size.Width = 415.000000000000000000
+            inherited btnVoltar: TSpeedButton
+              Size.Width = 405.000000000000000000
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+            end
+          end
+        end
+      end
+      inherited Label8: TLabel
+        Size.Width = 480.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+      end
+    end
+    inherited tabEntrarComEmail: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      inherited layMainLogin: TLayout
+        inherited Label14: TLabel
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+        end
+        inherited rectEntrar: TRectangle
+          inherited btnEntrar: TSpeedButton
+            Size.Height = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+          end
+        end
+        inherited Label15: TLabel
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+        end
+        inherited Label2: TLabel
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+        end
+      end
+      inherited Rectangle1: TRectangle
+        Position.Y = 638.000000000000000000
+        Size.Width = 460.000000000000000000
+        inherited SpeedButton1: TSpeedButton
+          Size.Width = 450.000000000000000000
+          Size.Height = 48.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+        end
+      end
+    end
+  end
+end
